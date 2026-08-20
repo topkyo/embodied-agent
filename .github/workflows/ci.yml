@@ -17,7 +17,7 @@ jobs:
     outputs:
       site_scope: ${{ steps.scope.outputs.site_scope }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Detect site-scope diff
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 11
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -73,7 +73,7 @@ jobs:
     needs: [deterministic, changes]
     timeout-minutes: 12
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -126,7 +126,7 @@ jobs:
           echo "::notice::$MSG"
           echo "## llm-gates 跳过（PR）" >> "$GITHUB_STEP_SUMMARY"
           echo "$MSG" >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: github.event_name != 'pull_request'
       - name: Site-scope skip (no runtime/domain diff)
         if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope == 'true'
