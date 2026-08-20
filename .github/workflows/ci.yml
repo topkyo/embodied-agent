@@ -38,7 +38,7 @@ jobs:
     timeout-minutes: 11
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: npm
@@ -74,7 +74,7 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: npm
@@ -136,7 +136,7 @@ jobs:
           echo "## llm-gates 跳过" >> "$GITHUB_STEP_SUMMARY"
           echo "$MSG" >> "$GITHUB_STEP_SUMMARY"
           echo "夜间回归见 nightly-strict / nightly-flywheel。" >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
         with:
           node-version: "20"
