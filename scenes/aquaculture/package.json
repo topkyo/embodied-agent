@@ -22,7 +22,7 @@
   "dependencies": {
     "@embodied-agent/core": "0.0.1",
     "@embodied-agent/domain-sdk": "0.0.1",
-    "zod": "^3.24.2"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "typescript": "^5.8.3",
