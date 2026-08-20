@@ -1,0 +1,40 @@
+{
+  "name": "@embodied-agent/api",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_ENV=development tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "test": "vitest run",
+    "test:coverage:gates": "vitest run --config vitest.gates.config.ts --coverage",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@embodied-agent/agent": "0.0.1",
+    "@embodied-agent/alert-runtime": "0.0.1",
+    "@embodied-agent/channel-runtime": "0.0.1",
+    "@embodied-agent/chat-runtime": "0.0.1",
+    "@embodied-agent/core": "0.0.1",
+    "@embodied-agent/domain-agriculture": "0.0.1",
+    "@embodied-agent/domain-aquaculture": "0.0.1",
+    "@embodied-agent/domain-industrial": "0.0.1",
+    "@embodied-agent/domain-robotics": "0.0.1",
+    "@embodied-agent/memory": "0.0.1",
+    "@embodied-agent/node": "0.0.1",
+    "@embodied-agent/platform": "0.0.1",
+    "@embodied-agent/runtime": "0.0.1",
+    "@embodied-agent/safety": "0.0.1",
+    "@fastify/rate-limit": "^11.1.0",
+    "fastify": "^5.2.2",
+    "globals": "^17.7.0",
+    "mqtt": "^5.10.4",
+    "redis": "^6.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.8"
+  }
+}

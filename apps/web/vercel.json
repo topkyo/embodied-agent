@@ -1,0 +1,52 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "scope": "team_vZF69jAbikZqLi7whDRvrSx3",
+  "rewrites": [
+    {
+      "source": "/admin/:path*",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/admin/:path*"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/auth/:path*"
+    },
+    {
+      "source": "/integrations/:path*",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/integrations/:path*"
+    },
+    {
+      "source": "/health",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/health"
+    },
+    {
+      "source": "/lang-suggest",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/lang-suggest"
+    },
+    {
+      "source": "/domain-packs",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/domain-packs"
+    },
+    {
+      "source": "/channels",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/channels"
+    },
+    {
+      "source": "/webhooks/:path*",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/webhooks/:path*"
+    },
+    {
+      "source": "/dev/:path*",
+      "destination": "https://convertible-hereby-auction-congressional.trycloudflare.com/dev/:path*"
+    },
+    { "source": "/:path*", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(admin|auth|integrations|health|lang-suggest|domain-packs|channels|webhooks|dev)(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" },
+        { "key": "x-vercel-enable-rewrite-caching", "value": "0" }
+      ]
+    }
+  ]
+}

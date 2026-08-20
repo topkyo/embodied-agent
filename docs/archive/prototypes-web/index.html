@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>具身Agent 效果图索引</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      body {
+        background: linear-gradient(180deg, var(--sf-green-950) 0%, var(--sf-green-900) 100%);
+        color: var(--sf-hero-fg);
+        padding: calc(var(--sf-nav-h) + 48px) clamp(20px, 4vw, 48px) 72px;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: clamp(26px, 4vw, 36px);
+        margin-bottom: 8px;
+      }
+      .lead {
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+      .brand-line {
+        font-family: var(--sf-mono);
+        font-size: 12px;
+        color: var(--sf-accent-bright);
+        margin-bottom: 40px;
+        letter-spacing: 0.04em;
+      }
+      .group {
+        margin-bottom: 32px;
+      }
+      .group h2 {
+        font-size: 11px;
+        font-family: var(--sf-mono);
+        color: rgba(255, 255, 255, 0.4);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--sf-radius);
+        padding: 16px 20px;
+        margin-bottom: 8px;
+      }
+      .card h3 {
+        font-size: 15px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .card p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .btn {
+        font-size: 12px;
+        font-weight: 600;
+        background: var(--sf-white);
+        color: var(--sf-black);
+        padding: 8px 14px;
+        border-radius: var(--sf-radius);
+        white-space: nowrap;
+      }
+      .note {
+        margin-top: 40px;
+        padding: 20px;
+        border-left: 3px solid var(--sf-accent);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.65;
+      }
+      .rank {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 4px;
+      }
+      .ver {
+        font-family: var(--sf-mono);
+        font-size: 11px;
+        color: var(--sf-accent-bright);
+        margin-bottom: 12px;
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="ver">PROTOTYPE V3.1 · 2026-06-10</p>
+      <p class="note">
+        历史视觉原型，仅用于追溯设计探索；当前 IA、active_domain 与运行态入口以
+        <code>DESIGN.md</code> 和 <code>apps/web/src</code> 为准，原型中的 greenhouse-first
+        或双棚安装文案不得回流到实现。
+      </p>
+      <h1>具身Agent — 效果图全集</h1>
+      <p class="lead">
+        首页讲平台底座（Three.js 拓扑动画）；守棚工长讲现场结果；垂直页仅为能力示范
+      </p>
+      <p class="brand-line">EA · 智能体 × 节点 × 技能 × 沉淀 · 微信即工作区</p>
+
+      <div class="group">
+        <h2>Platform</h2>
+        <div class="card">
+          <div>
+            <h3>平台首页 /</h3>
+            <p>具身智能体叙事 · Three.js 节点拓扑 · 编排证据面板 · 四层底座与六步闭环</p>
+          </div>
+          <a class="btn" href="platform-home.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>智能硬件 /nodes</h3>
+            <p>执行/感知/视觉模块目录 · 典型场景组合</p>
+          </div>
+          <a class="btn" href="nodes.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>能力示范 /scenes</h3>
+            <p>守棚 LIVE 优先；工业/银龄/宠物标注拓展阶段</p>
+          </div>
+          <a class="btn" href="scenes.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>微信开始 /start/wechat</h3>
+            <p>棚主三步上手 · 安装人员分流 · 权限对照表</p>
+          </div>
+          <a class="btn" href="start-wechat.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>运维台 · 用户与绑定</h3>
+            <p>微信绑定真源 · 角色权限 · 配对码签发</p>
+          </div>
+          <a class="btn" href="console-ops-users.html">预览</a>
+        </div>
+      </div>
+
+      <div class="group">
+        <h2>Capability Demos</h2>
+        <div class="card">
+          <div>
+            <h3>守棚工长 · LIVE</h3>
+            <p>温室实景 Hero · gh-001 左下证据面板 · 试点边界</p>
+            <p class="rank">示范 #1 · 当前售卖重点</p>
+          </div>
+          <a class="btn" href="scene-greenhouse.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>工业安能卫士 · NEXT</h3>
+            <p>安环 · 能耗 · 审计联锁 · B2B 拓展</p>
+          </div>
+          <a class="btn" href="scene-industrial.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>银龄守护 · PLANNED</h3>
+            <p>跌倒/离床 · 家属微信 · 隐私策略</p>
+          </div>
+          <a class="btn" href="scene-elderly.html">预览</a>
+        </div>
+        <div class="card">
+          <div>
+            <h3>宠物助手 · EXPLORE</h3>
+            <p>轻量消费示范 · 占位叙事</p>
+          </div>
+          <a class="btn" href="scene-pet.html">预览</a>
+        </div>
+      </div>
+
+      <div class="group">
+        <h2>Ops</h2>
+        <div class="card">
+          <div>
+            <h3>平台底座 ops</h3>
+            <p>浅绿 EA 工作台 · 户外可读 · active deployment 健康态</p>
+          </div>
+          <a class="btn" href="console-ops.html">预览</a>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong style="color: var(--sf-white)">v3.1 信息架构</strong><br />
+        <code>/</code> 平台首页：Three.js + 编排证据，不讲守棚实景<br />
+        <code>/scenes/greenhouse</code> 守棚工长：温室图 + gh-001 LIVE 面板<br />
+        运维台与微信分流：棚主日常在微信，安装走运维台<br /><br />
+        评审截图 →
+        <code style="font-family: var(--sf-mono); font-size: 11px"
+          >docs/design/web-rebuild-v3/</code
+        >
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>银龄守护 — 具身Agent 能力示范</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .hero-elderly {
+        background-image:
+          var(--scene-overlay),
+          url("https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80");
+        background-color: #292524;
+      }
+      .hero-proof-line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 26px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .hero-proof-line a {
+        color: var(--scene-accent-bright);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .boundary-note {
+        padding: 20px 24px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        background: var(--sf-canvas);
+        font-size: 14px;
+        color: var(--sf-body);
+        line-height: 1.65;
+        margin-bottom: 32px;
+      }
+      .boundary-note strong {
+        color: var(--sf-ink);
+      }
+    </style>
+  </head>
+  <body class="scene-elderly">
+    <nav class="nav-scene">
+      <a href="scenes.html" style="font-weight: 600">← 能力示范</a>
+      <a href="platform-home.html" class="brand" style="font-size: 13px">
+        <span class="brand-mark" style="width: 24px; height: 24px; font-size: 10px">EA</span>
+        <span>具身Agent</span>
+      </a>
+    </nav>
+
+    <header class="scene-hero hero-elderly">
+      <div class="scene-hero-inner">
+        <p class="scene-id">银龄守护 · PLANNED · 能力示范</p>
+        <h1 class="display" style="font-size: clamp(32px, 5.5vw, 52px)">
+          家人安心，<br />老人无感，异常先到微信。
+        </h1>
+        <p class="lead on-dark" style="margin-bottom: 22px">
+          跌倒、离床、室温异常先推家属微信。隐私开关在设备侧，不默认把视频存上云。本场景不提供医疗诊断。
+        </p>
+        <div class="hero-proof-line">
+          <span class="badge badge-plan">PLANNED</span>
+          <span>合规与产品边界待补齐</span>
+          <a href="#boundary">规划说明 →</a>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="start-wechat.html">加入等候名单</a>
+          <a class="btn btn-ghost" href="nodes.html#home-pod">看家居硬件</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="scene-section">
+      <p class="eyebrow">日常怎么用</p>
+      <h2>看护三件套</h2>
+      <p class="sub">感 · 报 · 复盘 —— 非紧急不打扰，误报率回流技能优化。</p>
+      <div class="grid-3" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <div class="num">01 感</div>
+          <h3>无感感知</h3>
+          <p>毫米波、门磁、环境传感在边缘判定，减少摄像头依赖。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">02 报</div>
+          <h3>分级通知</h3>
+          <p>家属微信按紧急程度推送，夜间非紧急可静默。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">03 复盘</div>
+          <h3>持续优化</h3>
+          <p>异常事件与误报率写入日志，驱动技能调参。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section dark">
+      <p class="eyebrow on-dark">规划技能</p>
+      <h2>居家场景技能草案。</h2>
+      <p class="sub">排在工业之后：社会需求大，但监管与医疗边界声明更重。</p>
+      <div>
+        <div class="skill-row">
+          <code>fall_detection</code><span>跌倒检测：毫米波触发，家属微信确认级告警</span
+          ><span>L3</span>
+        </div>
+        <div class="skill-row">
+          <code>bed_exit_alert</code><span>离床提醒：夜间离床过久推送家属</span><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>env_comfort</code><span>室温异常：过冷过热预警，非医疗诊断</span><span>L1</span>
+        </div>
+        <div class="skill-row" style="border-bottom: none">
+          <code>privacy_gate</code><span>隐私闸：本地开关控制传感上报粒度</span><span>L1</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section alt" id="boundary">
+      <p class="eyebrow">规划边界</p>
+      <h2>需求真实，但产品边界须先说清。</h2>
+      <p class="sub">家属付费意愿中等偏高；需补齐隐私合规、家用节点形态与医疗免责声明。</p>
+      <div class="boundary-note">
+        <strong>价值定位：</strong
+        >验证「同一底座服务居家场景」的叙事，客单价与数据飞轮可期，但不做医疗承诺、不默认云端存视频。本页为
+        PLANNED 占位，无试点交付时间表。
+      </div>
+      <div class="grid-2" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <h3>典型硬件组合</h3>
+          <p style="margin-top: 12px; line-height: 1.8; color: var(--sf-body)">
+            家居感知 Pod ×N + 执行节点（灯光/窗帘，可选）
+          </p>
+        </div>
+        <div class="trio-card" style="border-left: 3px solid var(--scene-accent)">
+          <h3>当前重点</h3>
+          <p style="margin-top: 12px; color: var(--sf-body)">
+            资源优先投入守棚工长 LIVE。<a
+              href="scene-greenhouse.html"
+              style="color: var(--sf-accent)"
+              >看首个 LIVE 场景 →</a
+            >
+          </p>
+        </div>
+      </div>
+      <p style="margin-top: 32px; text-align: center; font-size: 14px; color: var(--sf-mute)">
+        <a href="platform-home.html" style="color: var(--sf-accent); font-weight: 500"
+          >回平台首页 →</a
+        >
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      <span>本页为 PLANNED 能力示范</span>
+      <a href="scenes.html" style="color: var(--sf-body)">返回能力示范列表</a>
+    </footer>
+  </body>
+</html>

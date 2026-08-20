@@ -1,0 +1,31 @@
+name: Nightly Strict Gate
+
+on:
+  schedule:
+    - cron: "30 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  strict:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Strict greenhouse + robot gate
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          EVAL_EVIDENCE_SECRET: ${{ secrets.EVAL_EVIDENCE_SECRET }}
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_THINKING: "1"
+          SIM_MAX_COMMAND_MS: "8000"
+          SIM_TELEMETRY_SCENARIO: full
+          SIM_TELEMETRY_REACT: "1"
+          FLYWHEEL_DEV: "1"
+          SUSTAINED_L2_COOLDOWN_SECONDS: "0"
+          DEVICE_HEARTBEAT_TIMEOUT_MS: "300000"
+        run: npm run verify:strict

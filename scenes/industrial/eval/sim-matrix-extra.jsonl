@@ -1,0 +1,10 @@
+{"utterance":"打开配电柜排风5分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":300}}}
+{"utterance":"关掉排风","expected_skill":"industrial.stop_exhaust","expected":{"target":{}}}
+{"utterance":"排风现在开了吗","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"最近通风执行了吗","expected_skill":"command.query_status","expected":{"parameters":{"action":"start_exhaust"}}}
+{"utterance":"热了帮我排一下","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":600}}}
+{"utterance":"排风开长一点 45 分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":2700}}}
+{"utterance":"机房温度是不是降下来了","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"把排风再开 20 分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":1200}}}
+{"utterance":"通风停了吗","expected_skill":"industrial.stop_exhaust","expected":{"target":{}}}
+{"utterance":"看下排风状态","expected_skill":"industrial.query_status","expected":{"target":{}}}

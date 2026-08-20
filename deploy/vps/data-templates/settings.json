@@ -1,0 +1,26 @@
+{
+  "deployment_id": "dep-gh-pilot-001",
+  "deployment_name": "守棚工长试点",
+  "active_domain": "agriculture",
+  "mqtt_url": "mqtt://127.0.0.1:1883",
+  "domain_configs": {
+    "agriculture": {
+      "flywheel_greenhouse_ids": ["gh-001", "gh-002"]
+    }
+  },
+  "llm": {
+    "provider": "deepseek",
+    "base_url": "https://api.deepseek.com/v1",
+    "model": "deepseek-v4-flash",
+    "thinking": true
+  },
+  "nlg": {
+    "enabled": false
+  },
+  "alert": {
+    "push_enabled": false
+  },
+  "digest": {
+    "enabled": false
+  }
+}

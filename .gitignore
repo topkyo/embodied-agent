@@ -1,0 +1,85 @@
+# AgentStack local development layer
+.agentstack/
+# 本地 agent skill / 工具层（含 open-design 等第三方 skill，不进仓）
+.agents/
+skills-lock.json
+.claude/skills/devloop/
+.claude/skills/brainstorming/
+.claude/skills/write-plan/
+.claude/skills/execute-plan/
+.claude/skills/finish/
+.opencode/skills/devloop/
+.opencode/skills/brainstorming/
+.opencode/skills/write-plan/
+.opencode/skills/execute-plan/
+.opencode/skills/finish/
+.opencode/agents/explorer.md
+.opencode/agents/reviewer.md
+.cursor/rules/agentstack.mdc
+scripts/agentstack
+scripts/agentstack-*
+# End AgentStack local development layer
+
+.worktrees/
+
+# 本地走查截图 / 一次性审计脚本（不进仓）
+/images/
+scripts/tmp-*
+# Local dogfood playwright screenshot walker (re-named from scripts/tmp-workbench-audit.mjs;
+# hard-coded local-only admin creds → not blessed repo code)
+scripts/workbench-audit.mjs
+dogfood-output/
+
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+data/
+scripts/fixtures/**/deployments/
+.codegraph/
+.env
+.env.*
+!.env.example
+!.env.demo-site.example
+!deploy/vps/.env.vps.example
+.vercel
+
+# Eval 运行报告（npm run sim:matrix / verify:chat 每次生成）
+docs/eval/sim-matrix-report.json
+docs/eval/*-sim-matrix-report.json
+docs/eval/chat-verify-report.json
+docs/eval/robot-flywheel-report.json
+docs/eval/robot-execution-matrix-report.json
+docs/eval/robotics-flywheel-report.json
+docs/eval/robotics-execution-matrix-report.json
+local-eval-reports/
+scripts/fixtures/*/deployments/
+scripts/fixtures/*/intent-resolve.jsonl
+scripts/fixtures/*/.sim-locks/
+scripts/fixtures/*/domain-packs/
+scripts/fixtures/*/nlg-resolve.jsonl
+scripts/fixtures/*/pending-confirm.json
+scripts/fixtures/*/platform-bindings.json
+scripts/fixtures/*/users.json
+scripts/fixtures/*/wechat-ilink/
+dogfood-output/
+test-results/
+
+# agent-browser 截图（临时探索产物）
+snap-*.png
+home.png
+
+# 本地 IDE/工具配置
+.grok/
+opencode.json
+
+# Mosquitto stack 自签 TLS（scripts/mosquitto-gen-certs.sh 生成）
+infra/mosquitto/certs/
+
+# deepwork orchestrator state (and any other .slim/ subdirs)
+.slim/
+SCRATCH/ux-mockup/vendor/
+
+# 本地验证草稿区，不入库
+SCRATCH/

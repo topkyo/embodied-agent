@@ -1,0 +1,19 @@
+[Unit]
+Description=Embodied Agent API
+After=network.target mosquitto.service
+Wants=mosquitto.service
+
+[Service]
+Type=simple
+User=tim
+WorkingDirectory=/home/tim/project/EA
+EnvironmentFile=/home/tim/project/EA/.env.vps.local
+Environment=PATH=/home/tim/project/EA/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStartPre=/bin/bash /home/tim/project/EA/deploy/vps/vps-api-entry.sh --check
+ExecStart=/usr/bin/npm run start -w @embodied-agent/api
+Restart=on-failure
+RestartSec=5
+MemoryMax=512M
+
+[Install]
+WantedBy=multi-user.target

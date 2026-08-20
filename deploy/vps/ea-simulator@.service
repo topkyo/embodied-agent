@@ -1,0 +1,19 @@
+[Unit]
+Description=Embodied Agent Node Simulator (%i)
+After=network.target ea-api.service
+Wants=ea-api.service
+
+[Service]
+Type=simple
+User=tim
+WorkingDirectory=/home/tim/project/EA
+EnvironmentFile=/home/tim/project/EA/.env.vps.local
+Environment=PATH=/home/tim/project/EA/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=NODE_ID=%i
+ExecStart=/bin/bash /home/tim/project/EA/deploy/vps/sim-entry.sh
+Restart=on-failure
+RestartSec=5
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

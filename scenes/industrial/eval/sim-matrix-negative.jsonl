@@ -1,0 +1,8 @@
+{"utterance":"给我打开风机","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"去充电桩巡检","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"像大棚那样开风机","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"让机器狗去巡逻","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"帮我浇灌","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"设成夜间模式","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"打开温室通风","expected_skill":"clarification_needed","expected":{}}
+{"utterance":"机房像仓库一样通风","expected_skill":"clarification_needed","expected":{}}

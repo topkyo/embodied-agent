@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>具身Agent — 具身智能体平台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .hero-platform {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        color: var(--sf-hero-fg);
+        background: linear-gradient(
+          90deg,
+          #071612 0%,
+          #0a1f17 42%,
+          rgba(10, 31, 23, 0.55) 68%,
+          rgba(10, 31, 23, 0.2) 100%
+        );
+      }
+
+      #platform-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .hero-platform .hero-inner {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: grid;
+        /* 左列：文案 + 面板上下分区；右列留给 Three.js */
+        grid-template-columns: minmax(0, 580px) minmax(0, 1fr);
+        grid-template-rows: 1fr auto;
+        gap: clamp(28px, 4vw, 48px) clamp(20px, 5vw, 64px);
+        padding: calc(var(--sf-nav-h) + 56px) clamp(20px, 4vw, 48px) clamp(28px, 5vw, 48px);
+      }
+
+      .hero-copy {
+        max-width: 580px;
+        grid-column: 1;
+        grid-row: 1;
+        align-self: center;
+      }
+
+      .hero-platform .eyebrow {
+        color: var(--sf-accent-bright);
+        margin-bottom: 18px;
+      }
+      .hero-platform .display {
+        margin-bottom: 18px;
+      }
+      .hero-platform .lead {
+        margin-bottom: 26px;
+      }
+
+      .hero-platform .proof-panel {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: end;
+        justify-self: start;
+        width: min(420px, 100%);
+      }
+
+      .hero-cta-note {
+        margin-top: 14px;
+        font-size: 13px;
+        color: rgba(247, 255, 249, 0.55);
+      }
+
+      .hero-cta-note a {
+        color: var(--sf-accent-bright);
+        font-weight: 600;
+      }
+
+      .hw-tile,
+      .scene-tile {
+        display: block;
+        padding: 24px 20px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+      }
+      .hw-tile .chip {
+        font-family: var(--sf-mono);
+        font-size: 10px;
+        color: var(--sf-accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .hw-tile h3,
+      .scene-tile h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+      .hw-tile p,
+      .scene-tile p {
+        font-size: 14px;
+        color: var(--sf-body);
+      }
+      .scene-tile.muted-pack {
+        opacity: 0.9;
+      }
+
+      @media (max-width: 900px) {
+        .hero-platform .hero-inner {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+          gap: 32px;
+        }
+
+        .hero-copy {
+          align-self: start;
+        }
+
+        .hero-platform .proof-panel {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p
+      style="
+        position: relative;
+        z-index: 20;
+        margin: 16px clamp(20px, 4vw, 48px);
+        padding: 12px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: var(--sf-radius);
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.72);
+        background: rgba(0, 0, 0, 0.18);
+      "
+    >
+      历史视觉原型，不是当前 IA 真源；active_domain、LIVE / dogfood 口径和 legacy route 以 DESIGN.md
+      和 apps/web/src 为准，greenhouse-first 文案不得回流到实现。
+    </p>
+    <nav class="nav-platform on-dark" id="nav">
+      <a class="brand" href="platform-home.html"
+        ><span class="brand-mark">EA</span><span>具身Agent</span></a
+      >
+      <button class="nav-toggle" type="button" aria-label="菜单" id="nav-toggle">菜单</button>
+      <div class="nav-links">
+        <a href="platform-home.html" class="active">平台</a>
+        <a href="nodes.html">智能硬件</a>
+        <a href="scenes.html">能力示范</a>
+        <a href="start-wechat.html">微信开始</a>
+      </div>
+      <a class="nav-ops" href="console-ops.html">运维台</a>
+    </nav>
+
+    <header class="hero-platform" id="hero">
+      <canvas id="platform-canvas" aria-hidden="true"></canvas>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">具身智能体平台</p>
+          <h1 class="display">AI 编排理解，<br />定制硬件在现场执行。</h1>
+          <p class="lead on-dark">
+            云端智能体负责听懂与编排，现场节点负责传感与执行。每一句指令都经安全校验，每一次动作都可追溯、可复盘。
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="scenes.html">看能力示范</a>
+            <a class="btn btn-ghost" href="nodes.html">浏览智能硬件</a>
+          </div>
+          <p class="hero-cta-note">
+            棚主日常入口：<a href="start-wechat.html">微信开始</a> · 首个 LIVE 场景：<a
+              href="scene-greenhouse.html"
+              >守棚工长</a
+            >
+          </p>
+        </div>
+
+        <aside class="proof-panel" aria-label="平台编排状态（示意）">
+          <div class="panel-top">
+            <span>平台 · 编排中枢</span>
+            <span class="status-dot">在线</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><span>智能体</span><strong>理解中</strong></div>
+            <div class="metric"><span>节点</span><strong>可接入</strong></div>
+            <div class="metric"><span>技能</span><strong>可组合</strong></div>
+          </div>
+          <div class="event-list">
+            <div class="event">
+              <code>理解</code>
+              <p>自然语言转成可执行意图，匹配技能与安全规则。</p>
+            </div>
+            <div class="event">
+              <code>裁判</code>
+              <p>控设备须确认；权限、互锁、时长逐项检查。</p>
+            </div>
+            <div class="event">
+              <code>沉淀</code>
+              <p>动作前后写入日志，驱动效果复盘与策略建议。</p>
+            </div>
+          </div>
+          <p class="disclaimer">平台态示意；场景 telemetry 见各 LIVE 示范页。</p>
+        </aside>
+      </div>
+    </header>
+
+    <section class="section full alt">
+      <div class="section" style="padding-top: 0; padding-bottom: 0">
+        <div class="section-head">
+          <p class="eyebrow">四层底座</p>
+          <h2 class="section-title">不是聊天机器人，也不是普通 IoT 看板。</h2>
+          <p class="lead">
+            会理解的 Agent、在现场执行的 Node、可复盘的 Skills、持续沉淀的 Memory —— 四层缺一不可。
+          </p>
+        </div>
+        <div class="grid-4">
+          <div class="stack-card">
+            <div class="num">01 Agent</div>
+            <h3>云端大脑</h3>
+            <p>听懂自然语言，输出可执行意图；危险动作有安全护栏。</p>
+          </div>
+          <div class="stack-card">
+            <div class="num">02 Node</div>
+            <h3>场景身体</h3>
+            <p>
+              传感、继电器、风机在边缘执行；超时与互锁本地裁决。<a
+                href="nodes.html"
+                style="color: var(--sf-accent)"
+                >硬件 →</a
+              >
+            </p>
+          </div>
+          <div class="stack-card">
+            <div class="num">03 Skills</div>
+            <h3>场景技能</h3>
+            <p>带确认策略、风险等级和观察窗口，不是裸 API。</p>
+          </div>
+          <div class="stack-card">
+            <div class="num">04 Memory</div>
+            <h3>动作沉淀</h3>
+            <p>指令日志与 outcome 复盘，让下一轮建议更贴近现场。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section full">
+      <div class="section" style="padding-top: 0; padding-bottom: 0">
+        <div class="section-head">
+          <p class="eyebrow">物理闭环</p>
+          <h2 class="section-title">从一句指令，到一次可审计的现场动作。</h2>
+          <p class="lead">LLM 只提案，不静默接管设备。每一环有记录，出事能追溯。</p>
+        </div>
+        <div class="loop-strip">
+          <div class="loop-step">
+            <span>01</span><strong>IM / 语音</strong>
+            <p>用户用熟悉的方式说话。</p>
+          </div>
+          <div class="loop-step">
+            <span>02</span><strong>结构化意图</strong>
+            <p>识别做什么、做多久、对哪台设备。</p>
+          </div>
+          <div class="loop-step">
+            <span>03</span><strong>安全裁判</strong>
+            <p>权限、确认、互锁、时长逐项检查。</p>
+          </div>
+          <div class="loop-step">
+            <span>04</span><strong>Node 执行</strong>
+            <p>现场节点执行或拒绝。</p>
+          </div>
+          <div class="loop-step">
+            <span>05</span><strong>状态上报</strong>
+            <p>温湿度、设备状态与命令事件持续回传。</p>
+          </div>
+          <div class="loop-step">
+            <span>06</span><strong>效果复盘</strong>
+            <p>动作是否达到预期，自动留痕可审计。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section full alt">
+      <div class="section" style="padding-top: 0; padding-bottom: 0">
+        <div class="section-head">
+          <p class="eyebrow">首个 LIVE 场景</p>
+          <h2 class="section-title">守棚工长证明底座能落地。</h2>
+          <p class="lead">
+            温室查控、报警留痕、灌后通风已有模拟证据。平台首页讲底座，场景页讲结果。
+          </p>
+        </div>
+        <div class="grid-2" style="gap: 12px; background: transparent; max-width: 820px">
+          <a
+            class="scene-tile"
+            href="scene-greenhouse.html"
+            style="background: var(--sf-canvas); border-color: var(--sf-accent)"
+          >
+            <span class="badge badge-live">LIVE</span>
+            <h3>守棚工长</h3>
+            <p>微信查棚、确认通风、报警留痕 —— 看温室实景与 gh-001 联调面板</p>
+          </a>
+          <a class="scene-tile" href="start-wechat.html" style="background: var(--sf-canvas)">
+            <span class="badge badge-live">入口</span>
+            <h3>微信开始</h3>
+            <p>棚主扫码绑定，日常操作留在微信内</p>
+          </a>
+        </div>
+        <p style="margin-top: 20px; font-size: 14px; color: var(--sf-mute)">
+          更多示范（工业、看护等）见
+          <a href="scenes.html" style="color: var(--sf-accent); font-weight: 600">能力示范</a
+          >，非当前售卖重点。
+        </p>
+      </div>
+    </section>
+
+    <section class="section dark full">
+      <div class="section" style="padding-top: 0; padding-bottom: 0">
+        <div class="section-head">
+          <p class="eyebrow on-dark">数据飞轮</p>
+          <h2 class="section-title">越用越懂现场，不靠口号证明价值。</h2>
+          <p class="lead on-dark">
+            有价值的不是一条温度读数，而是「为什么这次通风有效」。确认、拒绝、执行、复盘全部入库。
+          </p>
+        </div>
+        <div class="flywheel-grid">
+          <div>
+            <div class="fly-step">
+              <span class="fly-step-id">L1</span>
+              <div>
+                <h4>理解 + 路由</h4>
+                <p>话术进智能体，匹配技能与安全规则。</p>
+              </div>
+            </div>
+            <div class="fly-step">
+              <span class="fly-step-id">L2</span>
+              <div>
+                <h4>建议 + 确认</h4>
+                <p>物理动作须人确认后才下发。</p>
+              </div>
+            </div>
+            <div class="fly-step">
+              <span class="fly-step-id">L3</span>
+              <div>
+                <h4>效果复盘</h4>
+                <p>判定动作是否达到预期，写入可审计记录。</p>
+              </div>
+            </div>
+            <div class="fly-step" style="border-bottom: none">
+              <span class="fly-step-id">L4</span>
+              <div>
+                <h4>策略建议</h4>
+                <p>人确认后才写入草稿，不静默改现场规则。</p>
+              </div>
+            </div>
+          </div>
+          <div class="telemetry-card">
+            <div class="telemetry-row">
+              <span>使用者（微信）</span><a href="start-wechat.html">开始 →</a>
+            </div>
+            <div class="telemetry-row">
+              <span>安装与绑定</span><a href="console-ops.html">运维台 →</a>
+            </div>
+            <div class="telemetry-row">
+              <span>用户与权限</span><a href="console-ops-users.html">用户 →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>© 具身Agent · 具身智能体平台</span>
+      <a href="console-ops.html" style="color: var(--sf-body)">安装与运维</a>
+    </footer>
+
+    <script src="platform-hero-three.js"></script>
+    <script>
+      document.getElementById("nav-toggle").onclick = () =>
+        document.getElementById("nav").classList.toggle("menu-open");
+      const nav = document.getElementById("nav");
+      const hero = document.getElementById("hero");
+      let navReady = false;
+      requestAnimationFrame(() => {
+        navReady = true;
+      });
+      new IntersectionObserver(
+        ([e]) => {
+          if (!navReady) return;
+          nav.classList.toggle("on-dark", e.isIntersecting);
+          nav.classList.toggle("on-light", !e.isIntersecting);
+        },
+        { threshold: 0, rootMargin: "-52px 0px 0px 0px" },
+      ).observe(hero);
+    </script>
+  </body>
+</html>

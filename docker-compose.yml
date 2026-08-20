@@ -1,0 +1,113 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 10
+    profiles:
+      - stack
+
+  mosquitto:
+    image: eclipse-mosquitto:2
+    ports:
+      - "8883:8883"
+    environment:
+      MQTT_API_PASSWORD: ${MQTT_API_PASSWORD:?Set MQTT_API_PASSWORD for stack profile}
+      MQTT_NODE_PASSWORD: ${MQTT_NODE_PASSWORD:?Set MQTT_NODE_PASSWORD for stack profile}
+    volumes:
+      - ./infra/mosquitto:/app/infra/mosquitto:ro
+      - ./scripts/mosquitto-stack-entry.sh:/app/scripts/mosquitto-stack-entry.sh:ro
+    working_dir: /app
+    command: sh /app/scripts/mosquitto-stack-entry.sh
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "if command -v nc >/dev/null 2>&1; then nc -z 127.0.0.1 8883; else mosquitto_sub -h 127.0.0.1 -p 8883 --cafile /mosquitto/runtime/certs/ca.crt -u api -P $$MQTT_API_PASSWORD -t '$$SYS/broker/uptime' -C 1 -W 5; fi",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && sh scripts/stack-api-entry.sh"
+    volumes:
+      - .:/app
+      - agent_data:/app/data
+      - ./infra/mosquitto/certs/ca.crt:/app/infra/mosquitto/certs/ca.crt:ro
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: "3001"
+      AGENT_DATA_DIR: /app/data
+      DEPLOYMENT_ID: ${DEPLOYMENT_ID:?Set DEPLOYMENT_ID for stack profile}
+      # Self-signed stack TLS: mount ca.crt + MQTT_CA_FILE (keep rejectUnauthorized=1); do not disable verify.
+      MQTT_URL: ${MQTT_URL:-mqtts://mosquitto:8883}
+      MQTT_USERNAME: api
+      MQTT_PASSWORD: ${MQTT_API_PASSWORD:?Set MQTT_API_PASSWORD for stack profile}
+      MQTT_CA_FILE: /app/infra/mosquitto/certs/ca.crt
+      MQTT_REJECT_UNAUTHORIZED: ${MQTT_REJECT_UNAUTHORIZED:-1}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:5173}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN for stack profile}
+      INTEGRATION_SECRET: ${INTEGRATION_SECRET:-}
+      NODE_ENV: production
+      STATE_BACKEND: redis
+      REDIS_URL: redis://redis:6379
+      SQLITE_PATH: /app/data/agent.db
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    profiles:
+      - stack
+
+  web:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -w @embodied-agent/web -- --host 0.0.0.0"
+    volumes:
+      - .:/app
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_PROXY: http://api:3001
+      WEB_PORT: "5173"
+    depends_on:
+      - api
+    profiles:
+      - stack
+
+  node-simulator:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && npx tsx scripts/node-simulator.ts"
+    volumes:
+      - .:/app
+      - agent_data:/app/data
+      - ./infra/mosquitto/certs/ca.crt:/app/infra/mosquitto/certs/ca.crt:ro
+    environment:
+      MQTT_URL: ${MQTT_URL:-mqtts://mosquitto:8883}
+      MQTT_USERNAME: node
+      MQTT_PASSWORD: ${MQTT_NODE_PASSWORD:?Set MQTT_NODE_PASSWORD for stack profile}
+      MQTT_CA_FILE: /app/infra/mosquitto/certs/ca.crt
+      MQTT_REJECT_UNAUTHORIZED: ${MQTT_REJECT_UNAUTHORIZED:-1}
+      DEPLOYMENT_ID: ${DEPLOYMENT_ID:?Set DEPLOYMENT_ID for stack profile}
+      AGENT_DATA_DIR: /app/data
+      API_URL: http://api:3001
+      NODE_ID: node-sim-gh-001
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Set ADMIN_TOKEN for stack profile}
+    depends_on:
+      - mosquitto
+      - api
+    profiles:
+      - stack
+
+volumes:
+  agent_data:

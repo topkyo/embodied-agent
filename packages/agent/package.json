@@ -1,0 +1,30 @@
+{
+  "name": "@embodied-agent/agent",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@embodied-agent/core": "0.0.1",
+    "@embodied-agent/memory": "0.0.1",
+    "@embodied-agent/platform": "0.0.1"
+  },
+  "devDependencies": {
+    "@embodied-agent/domain-agriculture": "0.0.1",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.8"
+  }
+}

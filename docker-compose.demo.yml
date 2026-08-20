@@ -1,0 +1,202 @@
+# Anonymous readonly demo stack: three isolated scene profiles on one VPS.
+# Usage:
+#   cp .env.demo-site.example .env.demo-site.local   # fill secrets
+#   docker compose -f docker-compose.demo.yml --env-file .env.demo-site.local up -d
+#   docker compose -f docker-compose.demo.yml logs -f greenhouse-api
+#
+# Site build (point each scene at its demo API base):
+#   VITE_DEMO_API_GREENHOUSE=http://127.0.0.1:3101 \
+#   VITE_DEMO_API_ROBOT=http://127.0.0.1:3201 \
+#   VITE_DEMO_API_INDUSTRIAL=http://127.0.0.1:3301 \
+#     npm run build -w @embodied-agent/site
+
+x-demo-api-env: &demo_api_env
+  NODE_ENV: ${DEMO_STACK_NODE_ENV:-production}
+  SESSION_SECRET: ${DEMO_STACK_SESSION_SECRET:?Set DEMO_STACK_SESSION_SECRET}
+  DEMO_READONLY: "1"
+  # 生产语义下 DEMO_READONLY 必须与 DEMO_STACK=1 成对（见 assertDemoReadonlyEnv）
+  DEMO_STACK: "1"
+  # 演示栈 metrics 匿名公开（依赖 compose 网络）；客户部署请改用 METRICS_SCRAPE_TOKEN
+  METRICS_ALLOW_PUBLIC: "1"
+  ADMIN_TOKEN: ${DEMO_STACK_ADMIN_TOKEN:?Set DEMO_STACK_ADMIN_TOKEN}
+  CORS_ORIGIN: ${DEMO_SITE_ORIGIN:?Set DEMO_SITE_ORIGIN for demo site CORS}
+  STATE_BACKEND: file
+  COMMAND_STORE: file
+  CHAT_CHANNEL: dev
+
+services:
+  greenhouse-broker:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && exec npx --yes aedes-cli -p 1883"
+    volumes:
+      - .:/app
+    ports:
+      - "${DEMO_GREENHOUSE_MQTT_PORT:-1884}:1883"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'node -e "const n=require(''net'');const s=n.connect(1883,''127.0.0.1'',()=>{s.end();process.exit(0)});s.on(''error'',()=>process.exit(1))"',
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  greenhouse-api:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh /app/scripts/demo-api-entry.sh
+    volumes:
+      - .:/app
+      - demo_greenhouse_data:/app/data
+    ports:
+      - "${DEMO_GREENHOUSE_API_PORT:-3101}:3101"
+    environment:
+      <<: *demo_api_env
+      DEMO_SCENE: greenhouse
+      PORT: "3101"
+      AGENT_DATA_DIR: /app/data
+      DEPLOYMENT_ID: dep-demo-greenhouse-001
+      ACTIVE_DOMAIN: agriculture
+      MQTT_URL: mqtt://greenhouse-broker:1883
+    depends_on:
+      greenhouse-broker:
+        condition: service_healthy
+
+  greenhouse-sim:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && npx tsx scripts/node-simulator.ts"
+    volumes:
+      - .:/app
+      - demo_greenhouse_data:/app/data
+    environment:
+      MQTT_URL: mqtt://greenhouse-broker:1883
+      DEPLOYMENT_ID: dep-demo-greenhouse-001
+      AGENT_DATA_DIR: /app/data
+      API_URL: http://greenhouse-api:3101
+      NODE_ID: node-sim-gh-001
+      ADMIN_TOKEN: ${DEMO_STACK_ADMIN_TOKEN:?Set DEMO_STACK_ADMIN_TOKEN}
+      SIM_TELEMETRY_REACT: "1"
+    depends_on:
+      - greenhouse-api
+      - greenhouse-broker
+
+  robot-broker:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && exec npx --yes aedes-cli -p 1883"
+    volumes:
+      - .:/app
+    ports:
+      - "${DEMO_ROBOT_MQTT_PORT:-1885}:1883"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'node -e "const n=require(''net'');const s=n.connect(1883,''127.0.0.1'',()=>{s.end();process.exit(0)});s.on(''error'',()=>process.exit(1))"',
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  robot-m20-stub:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && M20_STUB_PORT=3099 exec npx tsx scripts/m20-stub.ts"
+    volumes:
+      - .:/app
+    expose:
+      - "3099"
+
+  robot-api:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh /app/scripts/demo-api-entry.sh
+    volumes:
+      - .:/app
+      - demo_robot_data:/app/data
+    ports:
+      - "${DEMO_ROBOT_API_PORT:-3201}:3201"
+    environment:
+      <<: *demo_api_env
+      DEMO_SCENE: robot
+      PORT: "3201"
+      AGENT_DATA_DIR: /app/data
+      DEPLOYMENT_ID: dep-demo-robot-001
+      ACTIVE_DOMAIN: robotics
+      MQTT_URL: mqtt://robot-broker:1883
+      M20_BASE_URL: http://robot-m20-stub:3099
+    depends_on:
+      robot-broker:
+        condition: service_healthy
+      robot-m20-stub:
+        condition: service_started
+
+  industrial-broker:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh -c "npm ci && exec npx --yes aedes-cli -p 1883"
+    volumes:
+      - .:/app
+    ports:
+      - "${DEMO_INDUSTRIAL_MQTT_PORT:-1886}:1883"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'node -e "const n=require(''net'');const s=n.connect(1883,''127.0.0.1'',()=>{s.end();process.exit(0)});s.on(''error'',()=>process.exit(1))"',
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  industrial-api:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: sh /app/scripts/demo-api-entry.sh
+    volumes:
+      - .:/app
+      - demo_industrial_data:/app/data
+    ports:
+      - "${DEMO_INDUSTRIAL_API_PORT:-3301}:3301"
+    environment:
+      <<: *demo_api_env
+      DEMO_SCENE: industrial
+      PORT: "3301"
+      AGENT_DATA_DIR: /app/data
+      DEPLOYMENT_ID: dep-demo-industrial-001
+      ACTIVE_DOMAIN: industrial
+      MQTT_URL: mqtt://industrial-broker:1883
+    depends_on:
+      industrial-broker:
+        condition: service_healthy
+
+  industrial-sim:
+    image: node:20-bookworm-slim
+    working_dir: /app
+    command: >-
+      sh -c "npm ci && AGENT_DATA_DIR=/app/data API_URL=http://industrial-api:3301
+      ADMIN_TOKEN=$${DEMO_STACK_ADMIN_TOKEN} MQTT_URL=mqtt://industrial-broker:1883
+      npm run ensure:sim-industrial && NODE_ID=node-sim-industrial-001
+      exec npx tsx scripts/node-simulator.ts --profile=industrial"
+    volumes:
+      - .:/app
+      - demo_industrial_data:/app/data
+    environment:
+      MQTT_URL: mqtt://industrial-broker:1883
+      DEPLOYMENT_ID: dep-demo-industrial-001
+      AGENT_DATA_DIR: /app/data
+      API_URL: http://industrial-api:3301
+      NODE_ID: node-sim-industrial-001
+      ADMIN_TOKEN: ${DEMO_STACK_ADMIN_TOKEN:?Set DEMO_STACK_ADMIN_TOKEN}
+      SIM_TELEMETRY_REACT: "1"
+    depends_on:
+      - industrial-api
+      - industrial-broker
+
+volumes:
+  demo_greenhouse_data:
+  demo_robot_data:
+  demo_industrial_data:

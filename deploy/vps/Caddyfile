@@ -1,0 +1,46 @@
+# 狗云 VPS 反向代理配置（Caddy）
+# Caddy 绑定 127.0.0.1:80，由 Cloudflare Tunnel 代理。
+# Clash/sing-box 面板勿在此反代；仅本机 127.0.0.1:9090，经 SSH 转发访问。
+
+:80 {
+    bind 127.0.0.1
+
+    handle /admin/* {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /auth/* {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /integrations/* {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /health {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /lang-suggest {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /domain-packs {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /channels {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /webhooks/* {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle /dev/* {
+        reverse_proxy http://127.0.0.1:3001
+    }
+    handle {
+        root * /home/tim/project/EA/apps/web/dist
+        file_server
+        try_files {path} /index.html
+    }
+
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}

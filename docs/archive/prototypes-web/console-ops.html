@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>安装与运维 — 具身Agent</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .role-banner {
+        background: var(--sf-accent-soft);
+        border: 1px solid rgba(31, 138, 91, 0.25);
+        border-radius: var(--sf-radius);
+        padding: 12px 16px;
+        margin: 20px 28px 0;
+        font-size: 13px;
+        color: var(--sf-ops-muted);
+      }
+      .role-banner strong {
+        color: var(--sf-accent);
+      }
+      .farm-lock {
+        text-align: right;
+        font-size: 13px;
+      }
+      .farm-lock strong {
+        display: block;
+        font-size: 16px;
+        margin-top: 4px;
+      }
+      .list-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--sf-ops-border);
+        font-size: 13px;
+      }
+      .pill {
+        font-family: var(--sf-mono);
+        font-size: 10px;
+        padding: 3px 8px;
+        background: var(--sf-accent-soft);
+        color: var(--sf-accent);
+        border-radius: var(--sf-radius);
+      }
+      .ops-panel h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+      .ops-panel p {
+        font-size: 13px;
+        color: var(--sf-ops-muted);
+        margin-bottom: 12px;
+      }
+      .ops-panel .link {
+        font-size: 13px;
+        color: var(--sf-accent-bright);
+        font-weight: 600;
+      }
+      .ops-sidebar-foot {
+        padding: 20px;
+        margin-top: auto;
+        font-size: 12px;
+        border-top: 1px solid var(--sf-ops-border);
+      }
+    </style>
+  </head>
+  <body class="ops">
+    <aside class="ops-sidebar">
+      <div class="brand-sm">
+        <span
+          class="brand-mark"
+          style="
+            display: inline-grid;
+            margin-right: 8px;
+            vertical-align: middle;
+            width: 22px;
+            height: 22px;
+            font-size: 9px;
+          "
+          >EA</span
+        >运维台<span>安装与运维</span>
+      </div>
+      <a class="ops-nav-item active" href="console-ops.html">总览</a>
+      <a class="ops-nav-item" href="#">配置</a>
+      <a class="ops-nav-item" href="#">集成</a>
+      <a class="ops-nav-item" href="#">设备 · 配对</a>
+      <a class="ops-nav-item" href="#">飞轮</a>
+      <a class="ops-nav-item" href="console-ops-users.html">用户</a>
+      <div class="ops-sidebar-foot">
+        <a href="platform-home.html" style="color: var(--sf-accent)">← 返回平台</a>
+      </div>
+    </aside>
+
+    <div class="ops-main">
+      <div class="ops-topbar">
+        <span>安装人员工作区 · 棚主请用微信</span>
+        <a href="start-wechat.html" style="color: var(--sf-accent)">棚主请用微信 →</a>
+      </div>
+
+      <div class="role-banner">
+        <strong>角色提示：</strong>
+        查棚、控设备、收报警请用微信。本台只做安装配对、用户绑定、大模型/MQTT
+        配置，以及系统健康与复盘查看。
+      </div>
+
+      <div class="ops-content">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 8px;
+          "
+        >
+          <div>
+            <p class="eyebrow" style="color: var(--sf-ops-muted)">安装与运维</p>
+            <h1 style="font-size: 28px; margin-top: 8px">系统总览</h1>
+            <p style="font-size: 14px; color: var(--sf-ops-muted); margin-top: 6px">
+              一眼确认：API、大模型、MQTT、节点是否在线
+            </p>
+          </div>
+          <div class="farm-lock">
+            <span style="color: var(--sf-ops-muted)">当前农场</span>
+            <strong>farm-001 · 示范棚区</strong>
+          </div>
+        </div>
+
+        <div class="ops-status-grid">
+          <div class="ops-status-card">
+            <div class="label">API</div>
+            <div class="val ok">运行中</div>
+          </div>
+          <div class="ops-status-card">
+            <div class="label">LLM</div>
+            <div class="val ok">已配置</div>
+          </div>
+          <div class="ops-status-card">
+            <div class="label">MQTT</div>
+            <div class="val ok">:1883 已连</div>
+          </div>
+          <div class="ops-status-card">
+            <div class="label">NODES</div>
+            <div class="val ok">2 / 2 在线</div>
+          </div>
+        </div>
+
+        <div class="ops-panels">
+          <div class="ops-panel ops-panel">
+            <h3>微信集成</h3>
+            <p>微信 Bot 扫码 · 账号绑定 · 配对码认领</p>
+            <div class="list-row"><span>ClawBot 桥接</span><span class="pill">已连接</span></div>
+            <div class="list-row"><span>待绑定用户</span><span>1</span></div>
+            <a class="link" href="console-ops-users.html">用户与绑定 →</a>
+          </div>
+          <div class="ops-panel">
+            <h3>设备配对</h3>
+            <p>扫节点标签 → MQTT 配对 → 写入设备注册表</p>
+            <div class="list-row"><span>gh-001 节点</span><span class="pill">在线</span></div>
+            <div class="list-row"><span>gh-002 节点</span><span class="pill">在线</span></div>
+          </div>
+          <div class="ops-panel">
+            <h3>数据飞轮</h3>
+            <p>效果复盘 · 试点 ROI · 策略建议队列</p>
+            <div class="list-row"><span>近 24h outcome</span><span>3</span></div>
+            <div class="list-row"><span>待确认策略</span><span>1</span></div>
+          </div>
+          <div class="ops-panel">
+            <h3>遥测快照</h3>
+            <p>只读 — 用户应在微信查询。模拟 deployment 数据。</p>
+            <div class="list-row">
+              <span>gh-001 温度</span><span style="font-family: var(--sf-mono)">31.2°C</span>
+            </div>
+            <div class="list-row">
+              <span>gh-001 湿度</span><span style="font-family: var(--sf-mono)">78%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

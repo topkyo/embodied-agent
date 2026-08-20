@@ -1,0 +1,677 @@
+/*
+ * utilities.css — ops/console 原子工具类 + 少量页面局部布局
+ * 优先 class，禁止新增 style={{}}。复杂组件样式应回到 console-settings / console-layout。
+ */
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.u-flex {
+  display: flex;
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.u-items-center {
+  align-items: center;
+}
+
+.u-gap-sm {
+  gap: 8px;
+}
+
+.u-gap-md {
+  gap: 12px;
+}
+
+.u-mb-xs {
+  margin-bottom: 4px;
+}
+
+.u-mb-sm {
+  margin-bottom: 8px;
+}
+
+.u-my-sm {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.u-text-xs {
+  font-size: 11px;
+}
+
+.u-text-sm {
+  font-size: 12px;
+}
+
+.u-muted-soft {
+  opacity: 0.7;
+}
+
+.u-block {
+  display: block;
+}
+
+.u-w-120 {
+  width: 120px;
+}
+
+.u-w-160 {
+  width: 160px;
+}
+
+.u-list-plain {
+  margin: 0;
+  padding-left: 16px;
+  list-style: none;
+}
+
+.u-code-chip {
+  margin-right: 8px;
+}
+
+.u-code-chip-active {
+  opacity: 1;
+}
+
+.u-code-chip-inactive {
+  opacity: 0.55;
+}
+
+.u-node-pick-btn {
+  font-size: 12px;
+  padding: 2px 8px;
+  font-weight: 400;
+}
+
+.u-node-pick-btn.is-selected {
+  font-weight: 700;
+}
+
+/* 设备列表主行：实体优先，工程字段走 title */
+.u-node-row-main {
+  font-weight: 500;
+}
+
+@media (max-width: 860px) {
+  .u-node-row {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .u-node-row-main {
+    font-size: 14px;
+  }
+
+  .u-node-pick-btn {
+    min-height: 44px;
+  }
+
+  .ops-table th,
+  .ops-table td {
+    font-size: 12px;
+  }
+
+  .u-hint-ok,
+  .u-hint-muted {
+    font-size: 12px;
+  }
+}
+
+.u-hint-ok {
+  font-size: 11px;
+  color: var(--sf-accent);
+  margin-top: 4px;
+}
+
+.u-hint-muted {
+  font-size: 10px;
+  opacity: 0.65;
+  margin-top: 4px;
+}
+
+.console-bind-section {
+  border-top: 1px solid var(--sf-line);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.console-bind-title {
+  font-weight: 600;
+}
+
+.console-bind-grid {
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.console-bind-json {
+  width: 100%;
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.u-gap-lg {
+  gap: 16px;
+}
+
+.u-mb-md {
+  margin-bottom: 12px;
+}
+
+.u-mt-md {
+  margin-top: 16px;
+}
+
+.u-mt-xs {
+  margin-top: 4px;
+}
+
+.u-mt-sm {
+  margin-top: 8px;
+}
+
+.u-w-140 {
+  width: 140px;
+}
+
+.u-w-full {
+  width: 100%;
+}
+
+.u-break-all {
+  word-break: break-all;
+}
+
+.u-opacity-75 {
+  opacity: 0.75;
+}
+
+.u-opacity-60 {
+  opacity: 0.6;
+}
+
+.u-nowrap {
+  white-space: nowrap;
+}
+
+.u-self-end {
+  align-self: end;
+}
+
+.u-grid-span-full {
+  grid-column: 1 / -1;
+}
+
+.u-mt-field {
+  margin-top: 12px;
+}
+
+@keyframes u-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.u-spin {
+  animation: u-spin 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-spin {
+    animation: none;
+  }
+}
+
+.ops-subtitle {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+
+.u-list-indented {
+  font-size: 12px;
+  margin: 0;
+  padding-left: 16px;
+}
+
+.ops-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ops-data-table {
+  width: 100%;
+  font-size: 12px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.ops-data-table th {
+  text-align: left;
+  padding: 8px;
+}
+
+.ops-data-table td {
+  padding: 8px;
+}
+
+.ops-data-table .u-cell-utterance {
+  max-width: 220px;
+}
+
+.btn-compact {
+  font-size: 11px;
+  padding: 4px 8px;
+}
+
+.settings-subsection-title {
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+
+.settings-subsection-desc {
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+
+.settings-geo-status {
+  font-size: 12px;
+  margin: 0 0 8px;
+}
+
+.pair-shell {
+  max-width: 640px;
+}
+
+.pair-header {
+  margin-bottom: 16px;
+}
+
+.pair-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+}
+
+.pair-lead {
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.pair-back-link {
+  font-size: 12px;
+}
+
+.pair-field-full {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.pair-field-full.is-empty {
+  opacity: 0.6;
+}
+
+.ops-disabled-shell {
+  max-width: 640px;
+  margin: 48px auto;
+  padding: 24px;
+}
+
+.ops-disabled-pack-name {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.ops-disabled-actions {
+  margin-top: 24px;
+}
+
+.ops-platform-compact {
+  padding-bottom: 0;
+}
+
+.ops-platform-toolbar {
+  margin-top: 12px;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.ops-platform-details {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-ops-bg, transparent);
+}
+
+.ops-platform-details-summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--sf-ink);
+  list-style: disclosure-closed;
+}
+
+.ops-platform-details[open] > .ops-platform-details-summary {
+  list-style: disclosure-open;
+  margin-bottom: 0.5rem;
+}
+
+.ops-platform-details-lead {
+  margin: 0 0 0.75rem;
+}
+
+.ops-platform-section-flush {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Phase 2.2：平台底座 Tab — 密度工具感 underline tabs */
+.ops-platform-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0 0 1.25rem;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+.ops-platform-tab {
+  min-height: 40px;
+  padding: 0.55rem 1rem;
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--sf-mute);
+  font-family: var(--sf-sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.ops-platform-tab:hover {
+  color: var(--sf-ink);
+  background: var(--sf-canvas-soft, #f0f2ee);
+}
+
+.ops-platform-tab.is-active,
+.ops-platform-tab[aria-selected="true"] {
+  color: var(--sf-ink);
+  border-bottom-color: var(--sf-accent);
+}
+
+.ops-platform-tab:focus-visible {
+  outline: 2px solid var(--sf-accent);
+  outline-offset: 2px;
+}
+
+.ops-platform-tabpanel {
+  min-width: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ops-platform-tab {
+    transition: none;
+  }
+}
+
+/* Phase 4：总览自动刷新反馈 */
+.ops-page-header__actions-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 0.75rem;
+}
+
+.ops-refresh-live {
+  display: inline-flex;
+  min-height: 1.25rem;
+  align-items: center;
+}
+
+.ops-refresh-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.ops-platform-config-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.ops-platform-config-meta .muted {
+  margin: 0;
+  max-width: 42rem;
+}
+
+.link-accent-sm {
+  color: var(--sf-accent);
+  font-size: 13px;
+}
+
+.robot-actions-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.robot-form-spaced {
+  margin-top: 16px;
+}
+
+.robot-control-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.robot-control-group {
+  padding: 0.75rem 0;
+}
+
+.robot-control-group + .robot-control-group {
+  border-top: 1px solid var(--sf-line);
+}
+
+.robot-control-group__title {
+  margin: 0 0 0.5rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sf-mute);
+  letter-spacing: 0.02em;
+  text-wrap: balance;
+}
+
+.btn--confirm-risk {
+  border-color: var(--sf-amber);
+  color: var(--sf-ink);
+}
+
+.btn--confirm-risk:hover:not(:disabled) {
+  border-color: var(--sf-amber);
+  background: color-mix(in srgb, var(--sf-amber) 12%, var(--sf-white));
+}
+
+.btn--confirm-pending {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--sf-amber) 45%, transparent);
+}
+
+.ops-confirm-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ops-confirm-dialog__backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(17, 24, 20, 0.45);
+  cursor: pointer;
+}
+
+.ops-confirm-dialog__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 420px);
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-ops-surface, #fff);
+  box-shadow: 0 12px 40px rgba(17, 24, 20, 0.16);
+}
+
+.ops-confirm-dialog__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sf-ink);
+  text-wrap: balance;
+}
+
+.ops-confirm-dialog__message {
+  margin: 0 0 1rem;
+  white-space: pre-wrap;
+  color: var(--sf-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.ops-confirm-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.robot-command-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.robot-command-item {
+  margin-bottom: 6px;
+}
+
+.robot-review-item {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+.u-grid-col-span-1 {
+  grid-column: span 1;
+}
+
+.u-mt-20 {
+  margin-top: 20px;
+}
+
+.u-text-13 {
+  font-size: 13px;
+}
+
+.u-mb-16 {
+  margin-bottom: 16px;
+}
+
+.u-text-16 {
+  font-size: 16px;
+}
+
+.u-list-plain-flush {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.settings-console-narrow {
+  max-width: 640px;
+}
+
+.settings-console-flush {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.settings-actions-spaced {
+  margin-top: 24px;
+}
+
+.settings-actions-flush {
+  margin-top: 0;
+  justify-content: flex-start;
+}
+
+.actions-wrap {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ops-overview-nodes {
+  margin-top: 16px;
+}
+
+.ops-overview-nodes-title {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.ops-overview-nodes-list {
+  font-size: 12px;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.ops-overview-nodes-item {
+  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.picker-eyebrow {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.form-grid-spaced {
+  margin-top: 12px;
+}
+
+.channels-hint {
+  font-size: 13px;
+  margin-bottom: 16px;
+}

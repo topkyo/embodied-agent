@@ -1,0 +1,56 @@
+/* v3.1 design tokens — see DESIGN.md + apps/web/prototypes/_shared.css */
+:root {
+  --sf-green-950: #071612;
+  --sf-green-900: #0a1f17;
+  --sf-green-800: #0f2a1e;
+  --sf-green-700: #153d2b;
+  --sf-black: var(--sf-green-950);
+  --sf-ink: #111814;
+  --sf-white: #ffffff;
+  --sf-gray-50: #f7f8f5;
+  --sf-gray-100: #edf2ec;
+  --sf-gray-200: #dce4dc;
+  --sf-gray-400: #9fb2a7;
+  --sf-gray-500: #78847c;
+  --sf-gray-600: #4b5750;
+  --sf-body: #4b5750;
+  --sf-mute: #78847c;
+  --sf-line: #dce4dc;
+  --sf-canvas: #f7f8f5;
+  --sf-canvas-soft: #edf2ec;
+  --sf-hero-bg: var(--sf-green-900);
+  --sf-hero-fg: #f7fff9;
+  --sf-accent: #1f8a5b;
+  --sf-accent-bright: #78d691;
+  --sf-accent-soft: rgba(31, 138, 91, 0.14);
+  --sf-hero-overlay: linear-gradient(
+    90deg,
+    rgba(7, 22, 18, 0.9) 0%,
+    rgba(7, 22, 18, 0.62) 28%,
+    rgba(7, 22, 18, 0.18) 46%,
+    transparent 58%
+  );
+  --sf-blue: #3b6f90;
+  --sf-amber: #c77a20;
+  --sf-red: #b94a48;
+  --sf-radius: 4px;
+  --sf-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sf-sans: "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --sf-ops-bg: #f7f8f5;
+  --sf-ops-surface: #ffffff;
+  --sf-ops-border: #dce4dc;
+  --sf-ops-text: #111814;
+  --sf-ops-muted: #78847c;
+  --sf-max: 1200px;
+  --sf-nav-h: 52px;
+  --sf-cream: #fffaf0;
+  --sf-cream-soft: #fffdf6;
+  --sf-cream-gradient-end: #f7f1e5;
+  --sf-forest-ink: #244126;
+  --sf-forest-muted: #49653f;
+  --sf-success-bg: #edf7e8;
+  --sf-success-fg: #2f7d4d;
+  --sf-warning-border: #5a4a20;
+  --sf-danger-bg: #f7e6df;
+  --sf-danger-border: #ddb8a8;
+}

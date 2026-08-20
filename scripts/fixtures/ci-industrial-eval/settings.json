@@ -1,0 +1,18 @@
+{
+  "deployment_id": "dep-industrial-ci-001",
+  "deployment_name": "Industrial CI",
+  "llm_provider": "deepseek",
+  "llm_base_url": "https://api.deepseek.com/v1",
+  "llm_model": "deepseek-v4-flash",
+  "llm_thinking": false,
+  "stt_provider": "none",
+  "stt_model": "whisper-1",
+  "mqtt_url": "mqtt://127.0.0.1:1883",
+  "integration_secret": "industrial-ci-secret",
+  "active_domain": "industrial",
+  "domain_configs": {
+    "industrial": {
+      "default_cabinet_id": "cabinet-001"
+    }
+  }
+}

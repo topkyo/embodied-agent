@@ -1,0 +1,7 @@
+{"utterance":"1号棚打开通风10分钟","expected_skill":"clarification_needed","note":"robotics active_domain 下不得解析成 greenhouse.open_vent"}
+{"utterance":"A区灌溉5分钟","expected_skill":"clarification_needed","note":"robotics active_domain 下不得解析成 irrigation.start"}
+{"utterance":"2号棚温度超过30度就报警","expected_skill":"clarification_needed","note":"robotics active_domain 下不得解析成 alert.set_threshold"}
+{"utterance":"1号棚夜间别超过30度","expected_skill":"clarification_needed","note":"robotics active_domain 下不得解析成 greenhouse.set_mode"}
+{"utterance":"不要打开工作灯","expected_skill":"clarification_needed","note":"否定句不得被 structural override 修成 robot.set_light"}
+{"utterance":"别往前走1秒","expected_skill":"clarification_needed","note":"否定句不得被 structural override 修成 robot.move"}
+{"utterance":"工作灯状态","expected_skill":"clarification_needed","note":"查询句不得被 structural override 修成 robot.set_light"}

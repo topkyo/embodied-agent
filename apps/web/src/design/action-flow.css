@@ -1,0 +1,202 @@
+/* Action flow — Wave1 layout (overview shell) */
+
+.action-flow {
+  margin: 1rem 0 1.25rem;
+}
+
+.action-flow-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.action-flow-panel {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-white);
+}
+
+.action-flow-empty {
+  margin: 0.5rem 0 0;
+}
+
+.action-flow-pending-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.action-flow-pending-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--sf-line);
+  font-size: 13px;
+}
+
+.action-flow-pending-item:last-child {
+  border-bottom: none;
+}
+
+.action-flow-pending-action {
+  font-weight: 600;
+}
+
+.action-flow-cta {
+  margin: 0.75rem 0 0;
+  font-size: 13px;
+}
+
+.action-flow-evidence-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.action-flow-evidence-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--sf-line);
+  font-size: 13px;
+}
+
+.action-flow-evidence-item:last-child {
+  border-bottom: none;
+}
+
+.action-flow-evidence-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.action-flow-stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.action-flow-stage {
+  font-size: 11px;
+  opacity: 0.55;
+}
+
+.action-flow-stage--current {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.action-flow-stage--done {
+  opacity: 0.85;
+}
+
+/* Wave2: L2 narrative motion */
+
+@keyframes action-flow-enter-stagger {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.action-flow--enter .action-flow-progress,
+.action-flow--enter .action-flow-grid > * {
+  animation: action-flow-enter-stagger 0.45s ease-out both;
+}
+
+.action-flow--enter .action-flow-progress {
+  animation-delay: 0ms;
+}
+
+.action-flow--enter .action-flow-grid > :nth-child(1) {
+  animation-delay: 60ms;
+}
+
+.action-flow--enter .action-flow-grid > :nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.action-flow-progress {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0.75rem;
+  list-style: none;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-white);
+}
+
+.action-flow-progress-node {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-width: 0;
+  text-align: center;
+}
+
+.action-flow-progress-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: calc(50% + 0.45rem);
+  width: calc(100% - 0.9rem);
+  height: 2px;
+  background: var(--sf-line);
+}
+
+.action-flow-progress-node.action-flow-stage--done:not(:last-child)::after {
+  background: var(--sf-ok, #2f6f4e);
+}
+
+.action-flow-progress-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  border: 2px solid var(--sf-line);
+  background: var(--sf-white);
+  z-index: 1;
+}
+
+.action-flow-progress-node.action-flow-stage--done .action-flow-progress-dot {
+  border-color: var(--sf-ok, #2f6f4e);
+  background: var(--sf-ok, #2f6f4e);
+}
+
+.action-flow-progress-node.action-flow-stage--current .action-flow-progress-dot {
+  border-color: var(--sf-info, #2b6cb0);
+  background: var(--sf-info, #2b6cb0);
+  box-shadow: 0 0 0 3px var(--sf-info-bg, #e8f1fb);
+}
+
+.action-flow-progress-label {
+  font-size: 10px;
+  line-height: 1.2;
+  color: var(--sf-mute);
+}
+
+.action-flow-progress-node.action-flow-stage--current .action-flow-progress-label {
+  color: var(--sf-ink, #1a1a1a);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action-flow--enter .action-flow-progress,
+  .action-flow--enter .action-flow-grid > * {
+    animation: none;
+  }
+}

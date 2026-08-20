@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>智能硬件 — 具身Agent</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .page-hero {
+        padding: calc(var(--sf-nav-h) + 72px) clamp(20px, 4vw, 48px) 72px;
+        background: linear-gradient(180deg, var(--sf-green-900) 0%, var(--sf-green-800) 100%);
+        color: var(--sf-hero-fg);
+        text-align: center;
+      }
+      .page-hero h1 {
+        font-size: clamp(32px, 5vw, 56px);
+        margin-bottom: 14px;
+      }
+      .page-hero .lead {
+        margin: 0 auto;
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .product {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 20px;
+        padding: 24px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        background: var(--sf-canvas);
+      }
+      .product-visual {
+        height: 96px;
+        border-radius: var(--sf-radius);
+        display: grid;
+        place-items: center;
+        font-family: var(--sf-mono);
+        font-size: 9px;
+        letter-spacing: 0.06em;
+        text-align: center;
+        line-height: 1.4;
+      }
+      .product-visual.exec {
+        background: var(--sf-black);
+        color: var(--sf-gray-400);
+      }
+      .product-visual.vision {
+        background: #0f172a;
+        color: #93c5fd;
+      }
+      .product-visual.sensor {
+        background: #052e16;
+        color: var(--sf-accent-bright);
+      }
+      .product-visual.io {
+        background: var(--sf-gray-100);
+        color: var(--sf-gray-600);
+      }
+      .product-visual.home {
+        background: var(--sf-gray-50);
+        border: 1px solid var(--sf-line);
+        color: var(--sf-mute);
+      }
+      .product-visual.relay {
+        background: #422006;
+        color: #fbbf24;
+      }
+      .product-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .product h3 {
+        font-size: 17px;
+      }
+      .soc {
+        font-family: var(--sf-mono);
+        font-size: 10px;
+        padding: 3px 8px;
+        background: var(--sf-gray-100);
+        color: var(--sf-body);
+        border-radius: var(--sf-radius);
+      }
+      .product .role {
+        font-size: 14px;
+        color: var(--sf-body);
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+      .periph {
+        font-size: 11px;
+        padding: 4px 10px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        color: var(--sf-body);
+        display: inline-block;
+        margin: 0 4px 4px 0;
+      }
+      .demo-link {
+        font-size: 12px;
+        color: var(--sf-accent);
+        font-weight: 600;
+      }
+      .compose {
+        margin-top: 48px;
+        padding: 28px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+      }
+      .compose h3 {
+        font-size: 16px;
+        margin-bottom: 16px;
+      }
+      @media (max-width: 768px) {
+        .product-grid,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .product {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-platform on-dark" id="nav">
+      <a class="brand" href="platform-home.html"
+        ><span class="brand-mark">EA</span><span>具身Agent</span></a
+      >
+      <button class="nav-toggle" type="button" id="nav-toggle">菜单</button>
+      <div class="nav-links">
+        <a href="platform-home.html">平台</a>
+        <a href="nodes.html" class="active">智能硬件</a>
+        <a href="scenes.html">能力示范</a>
+        <a href="start-wechat.html">微信开始</a>
+      </div>
+      <a class="nav-ops" href="console-ops.html">运维台</a>
+    </nav>
+
+    <header class="page-hero">
+      <p class="eyebrow" style="color: var(--sf-accent-bright); margin-bottom: 16px">边缘硬件</p>
+      <h1>智能硬件矩阵</h1>
+      <p class="lead">
+        按场景选配执行、感知、视觉与扩展模块。云端智能体负责理解编排，边缘节点守住安全底线。
+      </p>
+    </header>
+
+    <section class="scene-section">
+      <p class="eyebrow">执行与控制</p>
+      <h2>现场动作 · 本地互锁 · 手动优先</h2>
+      <p class="sub">
+        不是一块万能板。执行节点、IO 机架、继电器扩展按场景组合，可按棚/车间/居家改配。
+      </p>
+      <div class="product-grid">
+        <article class="product" id="edge-control">
+          <div class="product-visual exec">EDGE<br />CONTROL</div>
+          <div>
+            <div class="product-head">
+              <h3>边缘执行节点</h3>
+              <span class="soc">ESP32-C6</span>
+            </div>
+            <p class="role">
+              通风、灌溉、风机、侧帘等脉冲控制；本地超时拒绝与互锁，断网也能守住安全。
+            </p>
+            <div>
+              <span class="periph">继电器 ×4</span><span class="periph">WiFi / BLE</span
+              ><span class="periph">急停输入</span>
+            </div>
+            <p style="margin-top: 12px">
+              <a class="demo-link" href="scene-greenhouse.html">守棚工长示范 →</a>
+            </p>
+          </div>
+        </article>
+        <article class="product" id="io-rack">
+          <div class="product-visual io">IO<br />RACK</div>
+          <div>
+            <div class="product-head">
+              <h3>工业 IO 机架</h3>
+              <span class="soc">ESP32 + 扩展板</span>
+            </div>
+            <p class="role">车间、泵站、空压站：多路干接点、RS485 下挂表计，防尘宽温外壳。</p>
+            <div>
+              <span class="periph">8 路继电器</span><span class="periph">RS485</span
+              ><span class="periph">IP54</span>
+            </div>
+            <p style="margin-top: 12px">
+              <a class="demo-link" href="scene-industrial.html">工业安能卫士示范 →</a>
+            </p>
+          </div>
+        </article>
+        <article class="product" id="relay-exp">
+          <div class="product-visual relay">RELAY<br />EXP</div>
+          <div>
+            <div class="product-head">
+              <h3>继电器扩展模块</h3>
+              <span class="soc">从节点</span>
+            </div>
+            <p class="role">执行节点容量不够时堆叠：灌溉分区、多路通风、灯光环控分路。</p>
+            <div><span class="periph">8 路干接点</span><span class="periph">Modbus RTU</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="scene-section alt">
+      <p class="eyebrow">感知与视觉</p>
+      <h2>环境数据 · 视频智能 · 按需密度</h2>
+      <p class="sub">温湿度、长势、毫米波 — 按场景选传感密度与算力档位，不必一次买齐。</p>
+      <div class="product-grid">
+        <article class="product" id="sensor-hub">
+          <div class="product-visual sensor">SENSOR<br />HUB</div>
+          <div>
+            <div class="product-head">
+              <h3>传感汇聚 Hub</h3>
+              <span class="soc">ESP32 / STM32</span>
+            </div>
+            <p class="role">温湿度、CO₂、土壤墒情、电表脉冲；多探头 RS485 汇聚后单点上云。</p>
+            <p style="margin-top: 12px">
+              <a class="demo-link" href="scene-greenhouse.html">温室传感示范 →</a>
+            </p>
+          </div>
+        </article>
+        <article class="product" id="vision-edge">
+          <div class="product-visual vision">VISION<br />EDGE</div>
+          <div>
+            <div class="product-head">
+              <h3>视觉边缘节点</h3>
+              <span class="soc">Jetson Orin Nano</span>
+            </div>
+            <p class="role">
+              车间异常画面、作物长势切片推理；重算力留在边缘，智能体只收结构化事件。
+            </p>
+            <p style="margin-top: 12px">
+              <a class="demo-link" href="scene-industrial.html">安环巡检示范 →</a>
+            </p>
+          </div>
+        </article>
+        <article class="product" id="home-pod">
+          <div class="product-visual home">HOME<br />POD</div>
+          <div>
+            <div class="product-head">
+              <h3>家居感知 Pod</h3>
+              <span class="soc">ESP32-S3</span>
+            </div>
+            <p class="role">圆角低噪、毫米波 + 环境传感；跌倒/离床/室温异常，隐私开关在设备侧。</p>
+            <p style="margin-top: 12px">
+              <a class="demo-link" href="scene-elderly.html">银龄守护示范 →</a>
+            </p>
+          </div>
+        </article>
+        <article class="product" id="pet-env">
+          <div class="product-visual sensor">PET<br />ENV</div>
+          <div>
+            <div class="product-head">
+              <h3>宠物环境棒</h3>
+              <span class="soc">ESP32-C3</span>
+            </div>
+            <p class="role">猫房/犬舍温湿度与舒适度提醒；轻量消费场景入门硬件。</p>
+            <p style="margin-top: 12px">
+              <a class="demo-link" href="scene-pet.html">宠物助手示范 →</a>
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <div class="compose">
+        <h3>典型组合（可按场景改配）</h3>
+        <div class="grid-3" style="gap: 12px; background: transparent">
+          <div class="trio-card">
+            <strong>温室查控</strong>
+            <p style="margin-top: 8px">执行节点 + 传感 Hub + 可选视觉（NDVI）</p>
+          </div>
+          <div class="trio-card">
+            <strong>车间安能</strong>
+            <p style="margin-top: 8px">IO 机架 + 能耗表计 + 视觉巡检节点</p>
+          </div>
+          <div class="trio-card">
+            <strong>居家看护</strong>
+            <p style="margin-top: 8px">家居 Pod ×N + 执行节点（灯光/窗帘）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span
+        >安装绑定与节点健康 →
+        <a href="console-ops.html" style="color: var(--sf-accent)">运维台</a></span
+      >
+      <span>硬件组合可按场景完全定制</span>
+    </footer>
+
+    <script>
+      document.getElementById("nav-toggle").onclick = () =>
+        document.getElementById("nav").classList.toggle("menu-open");
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("nav");
+        if (window.scrollY > 80) {
+          nav.classList.remove("on-dark");
+          nav.classList.add("on-light");
+        } else {
+          nav.classList.add("on-dark");
+          nav.classList.remove("on-light");
+        }
+      });
+    </script>
+  </body>
+</html>

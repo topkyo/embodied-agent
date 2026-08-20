@@ -1,0 +1,55 @@
+{
+  "deployments": [
+    {
+      "deployment_id": "dep-industrial-ci-001",
+      "name": "Industrial CI",
+      "timezone": "Asia/Shanghai",
+      "status": "active"
+    }
+  ],
+  "entities": [
+    {
+      "entity_id": "cabinet-001",
+      "deployment_id": "dep-industrial-ci-001",
+      "entity_type": "cabinet",
+      "domain_id": "industrial",
+      "name": "1号配电柜",
+      "aliases": ["配电柜", "机房"],
+      "status": "active"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "node-sim-industrial-001",
+      "deployment_id": "dep-industrial-ci-001",
+      "entity_id": "cabinet-001",
+      "status": "active",
+      "config_version": 1
+    }
+  ],
+  "devices": [
+    {
+      "device_id": "sensor-industrial-001",
+      "deployment_id": "dep-industrial-ci-001",
+      "device_type": "sensor",
+      "name": "柜内温度",
+      "aliases": ["温度传感器"],
+      "entity_id": "cabinet-001",
+      "node_id": "node-sim-industrial-001",
+      "status": "active",
+      "metrics": ["temperature_c"]
+    },
+    {
+      "device_id": "fan-industrial-001",
+      "deployment_id": "dep-industrial-ci-001",
+      "device_type": "fan",
+      "name": "排风风机",
+      "aliases": ["排风", "通风"],
+      "entity_id": "cabinet-001",
+      "node_id": "node-sim-industrial-001",
+      "status": "active",
+      "default_for": "exhaust_fan",
+      "channel": "relay:exhaust"
+    }
+  ]
+}

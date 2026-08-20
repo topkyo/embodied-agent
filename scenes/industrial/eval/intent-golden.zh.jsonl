@@ -1,0 +1,15 @@
+{"utterance":"配电柜现在多少度","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"机房热不热","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"启动排风10分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":600}}}
+{"utterance":"停止排风","expected_skill":"industrial.stop_exhaust","expected":{"target":{}}}
+{"utterance":"刚才排风启动成功了吗","expected_skill":"command.query_status","expected":{"parameters":{"action":"start_exhaust"}}}
+{"utterance":"配电柜温度多少","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"机房是不是过热了","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"开排风15分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":900}}}
+{"utterance":"停掉排风","expected_skill":"industrial.stop_exhaust","expected":{"target":{}}}
+{"utterance":"刚才排风成功了吗","expected_skill":"command.query_status","expected":{"parameters":{"action":"start_exhaust"}}}
+{"utterance":"现在排风在运行吗","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"排风开了多久了","expected_skill":"command.query_status","expected":{"parameters":{"action":"start_exhaust"}}}
+{"utterance":"机房设备状态","expected_skill":"industrial.query_status","expected":{"target":{}}}
+{"utterance":"启动通风30分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":1800}}}
+{"utterance":"关排风","expected_skill":"industrial.stop_exhaust","expected":{"target":{}}}

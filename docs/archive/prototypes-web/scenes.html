@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>能力示范 — 具身Agent</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .page-hero {
+        padding: calc(var(--sf-nav-h) + 72px) clamp(20px, 4vw, 48px) 56px;
+        text-align: center;
+        border-bottom: 1px solid var(--sf-line);
+      }
+      .page-hero h1 {
+        font-size: clamp(32px, 5vw, 52px);
+        margin-bottom: 12px;
+      }
+      .page-hero .lead {
+        margin: 0 auto;
+      }
+      .rank-note {
+        text-align: center;
+        font-family: var(--sf-mono);
+        font-size: 11px;
+        color: var(--sf-mute);
+        padding: 20px 0 8px;
+        letter-spacing: 0.06em;
+      }
+      .scene-list {
+        max-width: var(--sf-max);
+        margin: 0 auto;
+        padding: 8px clamp(20px, 4vw, 48px) 88px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .scene-card {
+        display: grid;
+        grid-template-columns: 180px 1fr auto;
+        gap: 28px;
+        align-items: center;
+        padding: 20px 24px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        background: var(--sf-canvas);
+        transition: border-color 0.2s;
+      }
+      .scene-card:hover {
+        border-color: var(--sf-gray-400);
+      }
+      .scene-card.featured {
+        border-color: var(--sf-ink);
+      }
+      .thumb {
+        height: 108px;
+        border-radius: var(--sf-radius);
+        background-size: cover;
+        background-position: center;
+        background-color: var(--sf-gray-100);
+      }
+      .scene-card h2 {
+        font-size: 19px;
+        margin-bottom: 6px;
+      }
+      .scene-card .desc {
+        font-size: 14px;
+        color: var(--sf-body);
+        margin-bottom: 8px;
+      }
+      .value-tag {
+        font-size: 12px;
+        color: var(--sf-mute);
+      }
+      .hw-tag {
+        font-family: var(--sf-mono);
+        font-size: 11px;
+        color: var(--sf-mute);
+        margin-top: 4px;
+      }
+      @media (max-width: 768px) {
+        .scene-card {
+          grid-template-columns: 1fr;
+        }
+        .thumb {
+          height: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-platform on-light" id="nav">
+      <a class="brand" href="platform-home.html"
+        ><span class="brand-mark">EA</span><span>具身Agent</span></a
+      >
+      <button class="nav-toggle" type="button" id="nav-toggle">菜单</button>
+      <div class="nav-links">
+        <a href="platform-home.html">平台</a>
+        <a href="nodes.html">智能硬件</a>
+        <a href="scenes.html" class="active">能力示范</a>
+        <a href="start-wechat.html">微信开始</a>
+      </div>
+      <a class="nav-ops" href="console-ops.html">运维台</a>
+    </nav>
+
+    <header class="page-hero">
+      <p class="eyebrow">能力示范</p>
+      <h1>看平台能落地成什么</h1>
+      <p class="lead">
+        每个垂直场景演示「智能体 + 硬件 + 技能 + 沉淀」如何在现场跑通。示范不等于当前售卖范围。
+      </p>
+    </header>
+
+    <p class="rank-note">排序依据 · 联调完成度 × 硬件代表性</p>
+
+    <div class="scene-list">
+      <a class="scene-card featured" href="scene-greenhouse.html">
+        <div
+          class="thumb"
+          style="background-image: url(&quot;assets/greenhouse-hero.jpg&quot;)"
+        ></div>
+        <div>
+          <span class="badge badge-live">LIVE</span>
+          <h2>守棚工长</h2>
+          <p class="desc">微信查棚、确认通风、报警留痕、灌后通风建议。模拟证据已跑通。</p>
+          <p class="value-tag">
+            <strong style="color: var(--sf-ink)">首个 LIVE</strong> · 数据闭环最完整
+          </p>
+          <p class="hw-tag">执行节点 + 传感 Hub</p>
+        </div>
+        <span class="btn btn-accent">进入</span>
+      </a>
+
+      <a class="scene-card" href="scene-industrial.html">
+        <div class="thumb" style="background: linear-gradient(135deg, #1e293b, #0f172a)"></div>
+        <div>
+          <span class="badge badge-next">NEXT</span>
+          <h2>工业安能卫士</h2>
+          <p class="desc">隐患早发现、能耗可审计、联锁动作须确认。面向车间与园区。</p>
+          <p class="value-tag">
+            <strong style="color: var(--sf-ink)">B2B 拓展</strong> · 技能库待建设
+          </p>
+          <p class="hw-tag">IO 机架 + 视觉边缘节点</p>
+        </div>
+        <span class="btn btn-outline">预览</span>
+      </a>
+
+      <a class="scene-card" href="scene-elderly.html">
+        <div class="thumb" style="background: linear-gradient(135deg, #292524, #1c1917)"></div>
+        <div>
+          <span class="badge badge-plan">PLANNED</span>
+          <h2>银龄守护</h2>
+          <p class="desc">跌倒/离床感知、家属微信简报。隐私开关在设备侧，不默认上云视频。</p>
+          <p class="hw-tag">家居感知 Pod</p>
+        </div>
+        <span class="btn btn-outline">预览</span>
+      </a>
+
+      <a class="scene-card" href="scene-pet.html">
+        <div class="thumb" style="background: linear-gradient(135deg, #1c1917, #422006)"></div>
+        <div>
+          <span class="badge badge-explore">EXPLORE</span>
+          <h2>宠物助手</h2>
+          <p class="desc">环境温湿、喂食提醒。传播友好的轻量示范，非近期主战场。</p>
+          <p class="hw-tag">宠物环境棒</p>
+        </div>
+        <span class="btn btn-outline">预览</span>
+      </a>
+    </div>
+
+    <script>
+      document.getElementById("nav-toggle").onclick = () =>
+        document.getElementById("nav").classList.toggle("menu-open");
+    </script>
+  </body>
+</html>

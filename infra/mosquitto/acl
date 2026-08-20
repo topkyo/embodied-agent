@@ -1,0 +1,17 @@
+# API publisher: command/config/pairing write; node telemetry read.
+user api
+topic write deployments/+/nodes/+/commands
+topic write deployments/+/nodes/+/config
+topic write deployments/+/pairing/+/install_code
+topic read deployments/+/nodes/+/events
+topic read deployments/+/nodes/+/telemetry
+topic read deployments/+/nodes/+/heartbeat
+
+# Scene Node / simulator: subscribe commands+config; publish events+telemetry.
+user node
+topic read deployments/+/nodes/+/commands
+topic read deployments/+/nodes/+/config
+topic read deployments/+/pairing/+/install_code
+topic write deployments/+/nodes/+/events
+topic write deployments/+/nodes/+/telemetry
+topic write deployments/+/nodes/+/heartbeat

@@ -1,0 +1,19 @@
+{"utterance":"确认","expected_skill":"clarification_needed","expected":{},"note":"确认由 chat pipeline 的 pending-confirm 层处理，裸确认不应解析成新机器人动作"}
+{"utterance":"取消","expected_skill":"clarification_needed","expected":{},"note":"取消由 chat pipeline 在 pending-confirm 层处理，不应解析成新机器人动作"}
+{"utterance":"查询喊话器状态","expected_skill":"robot.query_speaker_status","expected":{"target":{}}}
+{"utterance":"查询吊舱姿态","expected_skill":"robot.query_gimbal_attitude","expected":{"target":{}}}
+{"utterance":"切到基础步态","expected_skill":"robot.set_gait","expected":{"parameters":{"gait":"basic"}}}
+{"utterance":"切到导航模式","expected_skill":"robot.set_motion_mode","expected":{"parameters":{"mode":"navigation"}}}
+{"utterance":"本体 LED 前后都打开","expected_skill":"robot.set_body_led","expected":{"parameters":{"front":1,"back":1}}}
+{"utterance":"吊舱停止","expected_skill":"robot.gimbal_stop","expected":{"target":{}}}
+{"utterance":"开始吊舱录像","expected_skill":"robot.gimbal_record_start","expected":{"target":{}}}
+{"utterance":"停止吊舱录像","expected_skill":"robot.gimbal_record_stop","expected":{"target":{}}}
+{"utterance":"播放 inspection-tip.mp3 巡检提示音","expected_skill":"robot.play_audio","expected":{"parameters":{"file_name":"inspection-tip.mp3"}}}
+{"utterance":"停止播放音频","expected_skill":"robot.stop_audio","expected":{"target":{}}}
+{"utterance":"把喊话器音调调到120","expected_skill":"robot.set_speaker_pitch","expected":{"parameters":{"pitch_value":120}}}
+{"utterance":"吊舱俯仰角设为30度","expected_skill":"robot.gimbal_angle","expected":{"parameters":{"pitch":30}}}
+{"utterance":"锁定吊舱姿态","expected_skill":"robot.gimbal_lock","expected":{"target":{}}}
+{"utterance":"吊舱跟随目标","expected_skill":"robot.gimbal_follow","expected":{"target":{}}}
+{"utterance":"吊舱手动对焦到近处","expected_skill":"robot.gimbal_focus","expected":{"parameters":{"action":"near"}}}
+{"utterance":"吊舱拍一张可见光照片","expected_skill":"robot.gimbal_capture","expected":{"parameters":{"mode":"visible"}}}
+{"utterance":"热成像切到1号色板","expected_skill":"robot.gimbal_thermal_palette","expected":{"parameters":{"palette":1}}}
