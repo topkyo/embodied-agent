@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>工业安能卫士 — 具身Agent 能力示范</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .hero-industrial {
+        background-image:
+          var(--scene-overlay),
+          url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80");
+        background-color: #0f172a;
+      }
+      .hero-proof-line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 26px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .hero-proof-line a {
+        color: var(--scene-accent-bright);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .boundary-note {
+        padding: 20px 24px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        background: var(--sf-canvas);
+        font-size: 14px;
+        color: var(--sf-body);
+        line-height: 1.65;
+        margin-bottom: 32px;
+      }
+      .boundary-note strong {
+        color: var(--sf-ink);
+      }
+    </style>
+  </head>
+  <body class="scene-industrial">
+    <nav class="nav-scene">
+      <a href="scenes.html" style="font-weight: 600">← 能力示范</a>
+      <a href="platform-home.html" class="brand" style="font-size: 13px">
+        <span class="brand-mark" style="width: 24px; height: 24px; font-size: 10px">EA</span>
+        <span>具身Agent</span>
+      </a>
+    </nav>
+
+    <header class="scene-hero hero-industrial">
+      <div class="scene-hero-inner">
+        <p class="scene-id">工业安能卫士 · NEXT · 能力示范</p>
+        <h1 class="display" style="font-size: clamp(32px, 5.5vw, 56px)">
+          隐患早发现，<br />能耗可审计，动作可追责。
+        </h1>
+        <p class="lead on-dark" style="margin-bottom: 22px">
+          车间与园区通过微信或企微收告警、确认联锁动作、查看复盘记录。工业节点本地互锁优先，不静默接管设备。
+        </p>
+        <div class="hero-proof-line">
+          <span class="badge badge-next">NEXT</span>
+          <span>技能库待注册</span>
+          <a href="#boundary">拓展边界 →</a>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="start-wechat.html">预约场景演示</a>
+          <a class="btn btn-ghost" href="nodes.html#io-rack">看工业硬件</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="scene-section">
+      <p class="eyebrow">日常怎么用</p>
+      <h2>工业三件套</h2>
+      <p class="sub">安 · 能 · 审 —— 面向安全员与能源管理员，不是通用聊天后台。</p>
+      <div class="grid-3" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <div class="num">01 安</div>
+          <h3>分级告警</h3>
+          <p>烟感、温升、门禁异常推送到微信，须确认后才联动设备。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">02 能</div>
+          <h3>能耗审计</h3>
+          <p>分项能耗异常、峰谷建议，效果复盘跟踪节能量。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">03 审</div>
+          <h3>全链留痕</h3>
+          <p>谁、何时、确认了什么动作，日志可导出审计。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section dark">
+      <p class="eyebrow on-dark">规划技能</p>
+      <h2>待注册到平台技能库。</h2>
+      <p class="sub">工程栈复用 MQTT 与指令生命周期；场景技能需按工业合规单独建设。</p>
+      <div>
+        <div class="skill-row">
+          <code>safety_patrol</code><span>隐患巡检响应：异常画面/传感触发分级告警</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>energy_anomaly</code><span>能耗异常诊断：分项表计偏离基线时预警</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>interlock_confirm</code><span>联锁动作确认：停机/泄压等须人工确认</span
+          ><span>L3</span>
+        </div>
+        <div class="skill-row" style="border-bottom: none">
+          <code>shift_handover</code><span>班次交接简报：当班异常与待确认事项汇总</span
+          ><span>L1</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section alt" id="boundary">
+      <p class="eyebrow">拓展边界</p>
+      <h2>B2B 付费意愿强，但不是当前售卖重点。</h2>
+      <p class="sub">合规与审计刚需明确，与 IO 机架、视觉边缘节点天然契合。排在守棚之后推进。</p>
+      <div class="boundary-note">
+        <strong>为何排第二：</strong
+        >安全隐患与能源数据飞轮密度高，工程底座可复用；但工业技能库、联锁策略与现场验收周期更长，本页仅为能力证明，不作交付承诺。
+      </div>
+      <div class="grid-2" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <h3>典型硬件组合</h3>
+          <p style="margin-top: 12px; line-height: 1.8; color: var(--sf-body)">
+            工业 IO 机架 + RS485 表计 + 视觉边缘节点（可选）
+          </p>
+        </div>
+        <div class="trio-card" style="border-left: 3px solid var(--scene-accent)">
+          <h3>与守棚的关系</h3>
+          <p style="margin-top: 12px; color: var(--sf-body)">
+            同一平台底座，不同场景技能包。<a
+              href="scene-greenhouse.html"
+              style="color: var(--sf-accent)"
+              >守棚工长 LIVE →</a
+            >
+          </p>
+        </div>
+      </div>
+      <p style="margin-top: 32px; text-align: center; font-size: 14px; color: var(--sf-mute)">
+        平台首页讲编排与底座。<a
+          href="platform-home.html"
+          style="color: var(--sf-accent); font-weight: 500"
+          >回平台首页 →</a
+        >
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      <span>本页为 NEXT 能力示范</span>
+      <a href="scenes.html" style="color: var(--sf-body)">返回能力示范列表</a>
+    </footer>
+  </body>
+</html>

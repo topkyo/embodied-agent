@@ -1,0 +1,144 @@
+/* Marketing-site atomic utilities only (workbench console/ops/pair classes removed). */
+
+.u-flex {
+  display: flex;
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.u-items-center {
+  align-items: center;
+}
+
+.u-gap-sm {
+  gap: 8px;
+}
+
+.u-gap-md {
+  gap: 12px;
+}
+
+.u-gap-lg {
+  gap: 16px;
+}
+
+.u-mb-xs {
+  margin-bottom: 4px;
+}
+
+.u-mb-sm {
+  margin-bottom: 8px;
+}
+
+.u-mb-md {
+  margin-bottom: 12px;
+}
+
+.u-mb-16 {
+  margin-bottom: 16px;
+}
+
+.u-my-sm {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.u-mt-xs {
+  margin-top: 4px;
+}
+
+.u-mt-sm {
+  margin-top: 8px;
+}
+
+.u-mt-md {
+  margin-top: 16px;
+}
+
+.u-mt-20 {
+  margin-top: 20px;
+}
+
+.u-mt-field {
+  margin-top: 12px;
+}
+
+.u-text-xs {
+  font-size: 11px;
+}
+
+.u-text-sm {
+  font-size: 12px;
+}
+
+.u-text-13 {
+  font-size: 13px;
+}
+
+.u-text-16 {
+  font-size: 16px;
+}
+
+.u-muted-soft {
+  opacity: 0.7;
+}
+
+.u-block {
+  display: block;
+}
+
+.u-w-full {
+  width: 100%;
+}
+
+.u-break-all {
+  word-break: break-all;
+}
+
+.u-opacity-75 {
+  opacity: 0.75;
+}
+
+.u-opacity-60 {
+  opacity: 0.6;
+}
+
+.u-nowrap {
+  white-space: nowrap;
+}
+
+.u-self-end {
+  align-self: end;
+}
+
+.u-grid-span-full {
+  grid-column: 1 / -1;
+}
+
+.u-grid-col-span-1 {
+  grid-column: span 1;
+}
+
+.u-list-plain-flush {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.u-list-indented {
+  font-size: 12px;
+  margin: 0;
+  padding-left: 16px;
+}
+
+.link-accent-sm {
+  color: var(--sf-accent);
+  font-size: 13px;
+}
+
+.actions-wrap {
+  flex-wrap: wrap;
+  gap: 8px;
+}

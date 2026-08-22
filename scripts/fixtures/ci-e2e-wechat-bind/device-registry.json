@@ -1,0 +1,152 @@
+{
+  "deployments": [
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "name": "守棚工长试点",
+      "timezone": "Asia/Shanghai",
+      "status": "active"
+    }
+  ],
+  "entities": [
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "domain_id": "agriculture",
+      "entity_type": "greenhouse",
+      "entity_id": "gh-001",
+      "name": "1 号棚",
+      "aliases": ["1号棚", "一号棚", "1棚"],
+      "status": "active"
+    },
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "domain_id": "agriculture",
+      "entity_type": "greenhouse",
+      "entity_id": "gh-002",
+      "name": "2 号棚",
+      "aliases": ["2号棚", "二号棚", "2棚"],
+      "status": "active"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "node-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "status": "active",
+      "config_version": 1
+    },
+    {
+      "node_id": "node-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "status": "active",
+      "config_version": 1
+    }
+  ],
+  "devices": [
+    {
+      "device_id": "sensor-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "sensor",
+      "name": "1号棚环境传感器",
+      "entity_id": "gh-001",
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "metrics": ["temperature_c", "humidity_percent"]
+    },
+    {
+      "device_id": "vent-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "vent_motor",
+      "name": "1号棚通风电机",
+      "entity_id": "gh-001",
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "default_for": "vent_motor",
+      "channel": "relay:vent"
+    },
+    {
+      "device_id": "fan-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "fan",
+      "name": "1号棚风机",
+      "entity_id": "gh-001",
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "default_for": "fan",
+      "channel": "relay:fan"
+    },
+    {
+      "device_id": "ghc-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "greenhouse_controller",
+      "name": "1号棚控制器",
+      "entity_id": "gh-001",
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "default_for": "greenhouse_controller"
+    },
+    {
+      "device_id": "irrigation-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "irrigation_valve",
+      "name": "1号棚灌溉阀",
+      "entity_id": "gh-001",
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "default_for": "irrigation",
+      "channel": "relay:irrigation"
+    },
+    {
+      "device_id": "sensor-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "sensor",
+      "name": "2号棚环境传感器",
+      "entity_id": "gh-002",
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "metrics": ["temperature_c", "humidity_percent"]
+    },
+    {
+      "device_id": "vent-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "vent_motor",
+      "name": "2号棚通风电机",
+      "entity_id": "gh-002",
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "default_for": "vent_motor",
+      "channel": "relay:vent"
+    },
+    {
+      "device_id": "fan-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "fan",
+      "name": "2号棚风机",
+      "entity_id": "gh-002",
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "default_for": "fan",
+      "channel": "relay:fan"
+    },
+    {
+      "device_id": "ghc-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "greenhouse_controller",
+      "name": "2号棚控制器",
+      "entity_id": "gh-002",
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "default_for": "greenhouse_controller"
+    },
+    {
+      "device_id": "irrigation-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "device_type": "irrigation_valve",
+      "name": "2号棚灌溉阀",
+      "entity_id": "gh-002",
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "default_for": "irrigation",
+      "channel": "relay:irrigation"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{"utterance":"柜子现在多少度","expected_skill":"industrial.query_status","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"排风开10分钟","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":600}},"platform":"wechat"}
+{"utterance":"停掉排风","expected_skill":"industrial.stop_exhaust","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"机房热了","expected_skill":"industrial.query_status","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"排风开起","expected_skill":"industrial.start_exhaust","expected":{"parameters":{"duration_seconds":600}},"platform":"wechat"}
+{"utterance":"停排风","expected_skill":"industrial.stop_exhaust","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"看下温度","expected_skill":"industrial.query_status","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"排风开了没","expected_skill":"command.query_status","expected":{"parameters":{"action":"start_exhaust"}},"platform":"wechat"}

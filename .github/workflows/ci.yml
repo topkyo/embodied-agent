@@ -1,0 +1,282 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    if: github.repository == 'topkyo/embodied-agent-internal'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      site_scope: ${{ steps.scope.outputs.site_scope }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect site-scope diff
+        id: scope
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+          fi
+          if [ -z "${BASE:-}" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="HEAD~1"
+          fi
+          echo "site_scope=$(bash scripts/ci-site-scope.sh "$BASE")" >> "$GITHUB_OUTPUT"
+
+  deterministic:
+    if: github.repository == 'topkyo/embodied-agent-internal'
+    runs-on: ubuntu-latest
+    timeout-minutes: 11
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: bash scripts/ensure-workspace-runtime-build.sh
+        env:
+          FORCE_BUILD: "1"
+      # npm audit：high/critical 均阻断；已知 transitive high 见 scripts/fixtures/audit-allowlist.json。
+      - run: npx tsx scripts/check-npm-audit.ts
+      - run: npm run lint
+        env:
+          ENSURE_WORKSPACE_BUILD_DONE: "1"
+      - name: Prettier (changed files)
+        run: bash scripts/check-prettier-diff.sh "${{ github.event.pull_request.base.sha || github.event.before || 'HEAD~1' }}"
+      - run: npm test
+        env:
+          ENSURE_WORKSPACE_BUILD_DONE: "1"
+      # D0 C1：门闩源文件 coverage 硬门槛（lines≥70% branches≥60%）
+      - run: npm run test:coverage:gates -w @embodied-agent/web
+        env:
+          ENSURE_WORKSPACE_BUILD_DONE: "1"
+      # API 鉴权安全路径 coverage 硬门槛（lines≥70% branches≥60%）
+      - run: npm run test:coverage:gates -w @embodied-agent/api
+        env:
+          ENSURE_WORKSPACE_BUILD_DONE: "1"
+      - run: npm run build
+        env:
+          ENSURE_WORKSPACE_BUILD_DONE: "1"
+
+  e2e:
+    if: github.repository == 'topkyo/embodied-agent-internal'
+    runs-on: ubuntu-latest
+    needs: [deterministic, changes]
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Playwright site-scope (marketing site only)
+        if: needs.changes.outputs.site_scope == 'true'
+        env:
+          CI: "true"
+          E2E_SITE_URL: http://127.0.0.1:5170
+        run: npx playwright test --project site --grep "@critical|site smoke"
+      - name: Playwright smoke + critical dogfood (PR gate)
+        if: needs.changes.outputs.site_scope != 'true'
+        env:
+          CI: "true"
+          E2E_BASE_URL: http://127.0.0.1:5173
+          E2E_API_URL: http://127.0.0.1:3001
+          E2E_SITE_URL: http://127.0.0.1:5170
+        # D0 T3：web-smoke 全集 + 完整 web-dogfood（含 @critical 与三域语义）+ site smoke。
+        # critical 清单仍由 scripts/check-web-dogfood-critical.ts（lint）强制。
+        # site-dogfood 全文保留 nightly；PR 只跑 site smoke。
+        run: npx playwright test tests/e2e/web-smoke.spec.ts tests/e2e/web-dogfood.spec.ts tests/e2e/site-smoke.spec.ts
+      - name: Upload Playwright artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-e2e-failure
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  # LLM 门禁：所有 pull_request 一律不跑（job 仍出现并标绿，避免 required check 卡 PR）。
+  # 覆盖：nightly-strict / nightly-flywheel；main 上 push 仍跑完整 llm-gates。
+  llm-gates:
+    if: github.repository == 'topkyo/embodied-agent-internal'
+    runs-on: ubuntu-latest
+    needs: [deterministic, changes]
+    timeout-minutes: 45
+    env:
+      # fork 不注入 secrets 时各 step 内仍可 skip（仅 main push 路径会走到）。
+      IS_FORK_PR: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork == true }}
+    steps:
+      - name: Skip llm-gates on all pull requests
+        if: github.event_name == 'pull_request'
+        run: |
+          MSG="所有 PR 不跑 llm-gates（intent/robot/industrial/PR strict）。确定性门禁 = lint/test/build/e2e；LLM 回归见 nightly-strict / nightly-flywheel；合入 main 后的 push 仍会跑本 job。"
+          echo "::notice::$MSG"
+          echo "## llm-gates 跳过（PR）" >> "$GITHUB_STEP_SUMMARY"
+          echo "$MSG" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/checkout@v4
+        if: github.event_name != 'pull_request'
+      - name: Site-scope skip (no runtime/domain diff)
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope == 'true'
+        run: |
+          MSG="仅营销站/验收脚本改动，跳过 llm-gates（intent/robot/industrial/PR strict）"
+          echo "::notice::$MSG"
+          echo "## llm-gates 跳过" >> "$GITHUB_STEP_SUMMARY"
+          echo "$MSG" >> "$GITHUB_STEP_SUMMARY"
+          echo "夜间回归见 nightly-strict / nightly-flywheel。" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/setup-node@v4
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+      # sim:matrix / flywheel 等 tsx 脚本 import 的 workspace 包解析到 dist/，
+      # 不依赖 intent gate 步骤内部构建的步序，显式先建。
+      - run: bash scripts/ensure-workspace-runtime-build.sh
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+        env:
+          FORCE_BUILD: "1"
+      - run: echo "ENSURE_WORKSPACE_BUILD_DONE=1" >> "$GITHUB_ENV"
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+      - name: Intent gate (deterministic + required sim:matrix)
+        id: intent-gate
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+        timeout-minutes: 20
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          EVAL_EVIDENCE_SECRET: ${{ secrets.EVAL_EVIDENCE_SECRET }}
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_THINKING: "1"
+          AGENT_DATA_DIR: scripts/fixtures/ci-eval
+        run: |
+          if [ "$IS_FORK_PR" = "true" ]; then
+            MSG="fork 无 secrets，跳过真实 LLM intent gate"
+            echo "::notice::$MSG"
+            echo "- Intent gate：**跳过** — $MSG" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::error::LLM_API_KEY secret is required for real LLM intent gate"
+            exit 1
+          fi
+          if [ -z "$EVAL_EVIDENCE_SECRET" ]; then
+            echo "::error::EVAL_EVIDENCE_SECRET secret is required for signed sim matrix evidence"
+            exit 1
+          fi
+          SKIP_DOMAIN_FLYWHEEL=1 ./scripts/verify-intent-gate.sh
+      - name: Intent gate failure summary
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true' && failure() && steps.intent-gate.outcome == 'failure'
+        run: |
+          echo "## Intent gate 失败" >> "$GITHUB_STEP_SUMMARY"
+          echo "检查 \`verify-intent-gate.sh\` / sim:matrix 日志；主仓缺 \`LLM_API_KEY\` 或 \`EVAL_EVIDENCE_SECRET\` 时应硬失败。" >> "$GITHUB_STEP_SUMMARY"
+      - name: Robot live pack gate
+        id: robot-gate
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+        timeout-minutes: 20
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          EVAL_EVIDENCE_SECRET: ${{ secrets.EVAL_EVIDENCE_SECRET }}
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_THINKING: "1"
+          AGENT_DATA_DIR: scripts/fixtures/ci-robot-eval
+        run: |
+          if [ "$IS_FORK_PR" = "true" ]; then
+            MSG="fork 无 secrets，跳过 robot live pack 真实 LLM 门禁"
+            echo "::notice::$MSG"
+            echo "- Robot live pack gate：**跳过** — $MSG" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::error::LLM_API_KEY secret is required for robot live pack gate"
+            exit 1
+          fi
+          if [ -z "$EVAL_EVIDENCE_SECRET" ]; then
+            echo "::error::EVAL_EVIDENCE_SECRET secret is required for signed robot evidence"
+            exit 1
+          fi
+          npm run robot:matrix
+          npm run domain:flywheel
+      - name: Robot live pack gate failure summary
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true' && failure() && steps.robot-gate.outcome == 'failure'
+        run: |
+          echo "## Robot live pack gate 失败" >> "$GITHUB_STEP_SUMMARY"
+          echo "检查 \`robot:matrix\` / \`domain:flywheel\` 日志；主仓缺 \`LLM_API_KEY\` 或 \`EVAL_EVIDENCE_SECRET\` 时应硬失败。" >> "$GITHUB_STEP_SUMMARY"
+      - name: Industrial live pack gate
+        id: industrial-gate
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+        timeout-minutes: 20
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          EVAL_EVIDENCE_SECRET: ${{ secrets.EVAL_EVIDENCE_SECRET }}
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_THINKING: "1"
+          AGENT_DATA_DIR: scripts/fixtures/ci-industrial-eval
+        run: |
+          if [ "$IS_FORK_PR" = "true" ]; then
+            MSG="fork 无 secrets，跳过 industrial live pack 真实 LLM 门禁"
+            echo "::notice::$MSG"
+            echo "- Industrial live pack gate：**跳过** — $MSG" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::error::LLM_API_KEY secret is required for industrial live pack gate"
+            exit 1
+          fi
+          if [ -z "$EVAL_EVIDENCE_SECRET" ]; then
+            echo "::error::EVAL_EVIDENCE_SECRET secret is required for signed industrial evidence"
+            exit 1
+          fi
+          npm run domain:chat-verify -- --pack industrial
+          npm run domain:flywheel
+      - name: Industrial live pack gate failure summary
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true' && failure() && steps.industrial-gate.outcome == 'failure'
+        run: |
+          echo "## Industrial live pack gate 失败" >> "$GITHUB_STEP_SUMMARY"
+          echo "检查 \`domain:chat-verify\` / \`domain:flywheel\` 日志；主仓缺 \`LLM_API_KEY\` 或 \`EVAL_EVIDENCE_SECRET\` 时应硬失败。" >> "$GITHUB_STEP_SUMMARY"
+      - name: Strict symmetric subset (negative matrices)
+        id: pr-strict-gate
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true'
+        timeout-minutes: 15
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          EVAL_EVIDENCE_SECRET: ${{ secrets.EVAL_EVIDENCE_SECRET }}
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_THINKING: "1"
+        run: |
+          if [ "$IS_FORK_PR" = "true" ]; then
+            MSG="fork 无 secrets，跳过 strict symmetric subset 真实 LLM 门禁"
+            echo "::notice::$MSG"
+            echo "- Strict symmetric subset：**跳过** — $MSG" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::error::LLM_API_KEY secret is required for strict subset"
+            exit 1
+          fi
+          if [ -z "$EVAL_EVIDENCE_SECRET" ]; then
+            echo "::error::EVAL_EVIDENCE_SECRET secret is required for strict subset"
+            exit 1
+          fi
+          npm run verify:pr-strict
+      - name: Strict gate failure summary
+        if: github.event_name != 'pull_request' && needs.changes.outputs.site_scope != 'true' && failure() && steps.pr-strict-gate.outcome == 'failure'
+        run: |
+          echo "## Strict symmetric subset 失败" >> "$GITHUB_STEP_SUMMARY"
+          echo "检查 \`verify:pr-strict\` 日志；主仓缺 \`LLM_API_KEY\` 或 \`EVAL_EVIDENCE_SECRET\` 时应硬失败。" >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>用户与微信绑定 — 具身Agent 运维</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .hint {
+        background: var(--sf-accent-soft);
+        border: 1px solid rgba(31, 138, 91, 0.25);
+        border-radius: var(--sf-radius);
+        padding: 14px 18px;
+        font-size: 13px;
+        color: var(--sf-ops-muted);
+        margin-bottom: 24px;
+        line-height: 1.55;
+      }
+      .hint strong {
+        color: var(--sf-ops-text);
+      }
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+      .toolbar .btn {
+        font-size: 13px;
+        padding: 9px 16px;
+        border-radius: var(--sf-radius);
+        font-weight: 600;
+        border: 1px solid var(--sf-ops-border);
+        background: var(--sf-ops-surface);
+        color: var(--sf-ops-text);
+        cursor: default;
+      }
+      .toolbar .btn-primary {
+        background: var(--sf-white);
+        color: var(--sf-black);
+        border-color: var(--sf-white);
+      }
+      .toolbar .btn-accent {
+        background: var(--sf-accent);
+        color: var(--sf-white);
+        border-color: var(--sf-accent);
+      }
+      .panel {
+        background: var(--sf-ops-surface);
+        border: 1px solid var(--sf-ops-border);
+        border-radius: var(--sf-radius);
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+      .panel-head {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--sf-ops-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .panel-head h2 {
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .panel-head span {
+        font-family: var(--sf-mono);
+        font-size: 11px;
+        color: var(--sf-ops-muted);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      th {
+        font-family: var(--sf-mono);
+        font-size: 10px;
+        text-align: left;
+        padding: 10px 16px;
+        color: var(--sf-ops-muted);
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid var(--sf-ops-border);
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--sf-ops-border);
+        vertical-align: middle;
+        color: var(--sf-ops-text);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      .name-cell strong {
+        display: block;
+        font-weight: 600;
+      }
+      .name-cell span {
+        font-size: 12px;
+        color: var(--sf-ops-muted);
+      }
+      code {
+        font-family: var(--sf-mono);
+        font-size: 11px;
+        color: var(--sf-accent);
+      }
+      .role-pill {
+        font-family: var(--sf-mono);
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: var(--sf-radius);
+        font-weight: 500;
+      }
+      .role-owner {
+        background: var(--sf-accent-soft);
+        color: var(--sf-accent);
+      }
+      .role-worker {
+        background: rgba(59, 111, 144, 0.12);
+        color: var(--sf-blue);
+      }
+      .role-pending {
+        background: var(--sf-gray-100);
+        color: var(--sf-ops-muted);
+      }
+      .bind-ok {
+        color: var(--sf-accent);
+        font-size: 12px;
+      }
+      .bind-warn {
+        color: var(--sf-amber);
+        font-size: 12px;
+      }
+      .perm {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      .perm span {
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: var(--sf-radius);
+        background: var(--sf-gray-50);
+        color: var(--sf-ops-muted);
+        border: 1px solid var(--sf-ops-border);
+      }
+      .perm span.on {
+        background: var(--sf-accent-soft);
+        color: var(--sf-accent);
+        border-color: rgba(31, 138, 91, 0.3);
+      }
+      .perm span.off {
+        opacity: 0.4;
+        text-decoration: line-through;
+      }
+      .pairing-box {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding: 16px 18px;
+        border-top: 1px solid var(--sf-ops-border);
+        background: var(--sf-gray-50);
+      }
+      .pair-card {
+        background: var(--sf-ops-surface);
+        border: 1px solid var(--sf-ops-border);
+        border-radius: var(--sf-radius);
+        padding: 14px;
+      }
+      .pair-card .label {
+        font-size: 12px;
+        color: var(--sf-ops-muted);
+        margin-bottom: 6px;
+      }
+      .pair-card .code {
+        font-family: var(--sf-mono);
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+      }
+      .pair-card .exp {
+        font-size: 11px;
+        color: var(--sf-amber);
+        margin-top: 6px;
+      }
+      .ops-sidebar-foot {
+        padding: 20px;
+        margin-top: auto;
+        font-size: 12px;
+        border-top: 1px solid var(--sf-ops-border);
+        line-height: 1.8;
+      }
+      @media (max-width: 900px) {
+        .pairing-box {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="ops">
+    <aside class="ops-sidebar">
+      <div class="brand-sm">
+        <span
+          class="brand-mark"
+          style="
+            display: inline-grid;
+            margin-right: 8px;
+            vertical-align: middle;
+            width: 22px;
+            height: 22px;
+            font-size: 9px;
+          "
+          >EA</span
+        >运维台<span>安装与运维</span>
+      </div>
+      <a class="ops-nav-item" href="console-ops.html">总览</a>
+      <a class="ops-nav-item" href="#">配置</a>
+      <a class="ops-nav-item" href="#">集成</a>
+      <a class="ops-nav-item" href="#">设备 · 配对</a>
+      <a class="ops-nav-item" href="#">飞轮</a>
+      <a class="ops-nav-item active" href="console-ops-users.html">用户</a>
+      <div class="ops-sidebar-foot">
+        <a href="start-wechat.html" style="color: var(--sf-accent)">棚主微信扫码流程 →</a><br />
+        <a href="platform-home.html" style="color: var(--sf-ops-muted)">← 返回平台</a>
+      </div>
+    </aside>
+
+    <div class="ops-main">
+      <div class="ops-topbar">
+        <span>farm-001 · 示范棚区</span>
+        <a href="start-wechat.html" style="color: var(--sf-accent)"
+          >微信扫码流程 · 绑定状态在此查看 →</a
+        >
+      </div>
+
+      <div class="ops-content">
+        <p class="eyebrow" style="color: var(--sf-ops-muted)">用户与绑定</p>
+        <h1 style="font-size: 24px; margin-top: 8px">农场用户与微信绑定</h1>
+        <p
+          style="font-size: 14px; color: var(--sf-ops-muted); margin: 8px 0 24px; max-width: 640px"
+        >
+          多人扫同一个 Bot
+          后，各自微信账号对应农场用户。安装人员在此查看谁已绑定、谁待绑定、各自能做什么。
+        </p>
+
+        <div class="hint">
+          <strong>与「微信开始」页分工：</strong> 营销页只教棚主扫码三步；本页是绑定真源 —
+          创建用户、签发配对码、查看绑定状态与权限。
+        </div>
+
+        <div class="toolbar">
+          <button class="btn btn-accent" type="button">+ 新增农场用户</button>
+          <button class="btn btn-primary" type="button">签发配对码</button>
+          <button class="btn" type="button">刷新绑定列表</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>微信绑定一览</h2>
+            <span>GET /admin/bindings</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>显示名</th>
+                <th>农场用户 · 角色</th>
+                <th>微信账号</th>
+                <th>绑定状态</th>
+                <th>微信内权限</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name-cell"><strong>王老板</strong><span>棚主</span></td>
+                <td><code>owner-001</code> <span class="role-pill role-owner">owner</span></td>
+                <td><code>wx_o7Kx…4f2a</code></td>
+                <td class="bind-ok">● 已绑定 · 06-08 14:20</td>
+                <td class="perm">
+                  <span class="on">查询</span><span class="on">控棚确认</span
+                  ><span class="on">报警</span><span class="on">全留痕</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="name-cell"><strong>李工人</strong><span>现场工人</span></td>
+                <td><code>worker-001</code> <span class="role-pill role-worker">worker</span></td>
+                <td><code>wx_m9Pq…8b1c</code></td>
+                <td class="bind-ok">● 已绑定 · 06-08 15:02</td>
+                <td class="perm">
+                  <span class="on">查询</span><span class="off">控棚</span
+                  ><span class="on">报警</span><span class="on">本人留痕</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="name-cell"><strong>张师傅</strong><span>待邀请</span></td>
+                <td><code>worker-002</code> <span class="role-pill role-pending">worker</span></td>
+                <td>—</td>
+                <td class="bind-warn">○ 待绑定 · 码 482916</td>
+                <td class="perm"><span class="off">未绑定不可聊</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="pairing-box">
+            <div class="pair-card">
+              <div class="label">worker-002 · 张师傅</div>
+              <div class="code">482916</div>
+              <div class="exp">15 分钟有效 · 待认领</div>
+            </div>
+            <div class="pair-card">
+              <div class="label">扫码后认领</div>
+              <p
+                style="
+                  font-size: 12px;
+                  color: var(--sf-ops-muted);
+                  line-height: 1.5;
+                  margin-top: 8px;
+                "
+              >
+                用户微信扫 Bot 后提交配对码，或由安装人员在后台代填完成绑定。
+              </p>
+            </div>
+            <div class="pair-card">
+              <div class="label">未绑定用户发消息</div>
+              <p style="font-size: 12px; color: var(--sf-ops-muted); margin-top: 8px">
+                回复：「尚未绑定农场账号，请联系安装人员」
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>农场用户（RBAC）</h2>
+            <span>GET /admin/users</span>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>user_id</th>
+                <th>显示名</th>
+                <th>角色</th>
+                <th>deployment_id</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>owner-001</code></td>
+                <td>王老板</td>
+                <td><span class="role-pill role-owner">owner</span></td>
+                <td>dep-gh-pilot-001</td>
+                <td style="color: var(--sf-accent); font-size: 12px">编辑</td>
+              </tr>
+              <tr>
+                <td><code>worker-001</code></td>
+                <td>李工人</td>
+                <td><span class="role-pill role-worker">worker</span></td>
+                <td>dep-gh-pilot-001</td>
+                <td style="color: var(--sf-accent); font-size: 12px">编辑</td>
+              </tr>
+              <tr>
+                <td><code>worker-002</code></td>
+                <td>张师傅</td>
+                <td><span class="role-pill role-worker">worker</span></td>
+                <td>dep-gh-pilot-001</td>
+                <td style="color: var(--sf-accent); font-size: 12px">编辑</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

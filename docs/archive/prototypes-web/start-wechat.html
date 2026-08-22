@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>微信开始 — 具身Agent</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .page-wrap {
+        padding: calc(var(--sf-nav-h) + 48px) clamp(20px, 4vw, 48px) 80px;
+        max-width: var(--sf-max);
+        margin: 0 auto;
+      }
+      .page-wrap h1 {
+        font-size: clamp(28px, 4vw, 44px);
+        margin-bottom: 12px;
+      }
+      .role-panel {
+        display: none;
+      }
+      .role-panel.active {
+        display: block;
+      }
+      .chip {
+        display: inline-block;
+        font-size: 12px;
+        padding: 6px 12px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        margin: 4px 4px 0 0;
+      }
+      .ops-link {
+        margin-top: 32px;
+        padding: 16px 20px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <p
+      style="
+        margin: 16px clamp(20px, 4vw, 48px);
+        padding: 12px 16px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        font-size: 12px;
+        color: var(--sf-muted);
+      "
+    >
+      历史视觉原型，不是当前 IA 真源；active_domain、微信入口与 legacy route 以 DESIGN.md 和
+      apps/web/src 为准，农场 / 双棚文案不得回流到实现。
+    </p>
+    <nav class="nav-platform on-light" id="nav">
+      <a class="brand" href="platform-home.html">
+        <span class="brand-mark">EA</span>
+        <span>具身Agent</span>
+      </a>
+      <button class="nav-toggle" type="button" id="nav-toggle">菜单</button>
+      <div class="nav-links" id="nav-links">
+        <a href="platform-home.html">平台</a>
+        <a href="nodes.html">智能硬件</a>
+        <a href="scenes.html">能力示范</a>
+        <a href="start-wechat.html" class="active">微信开始</a>
+      </div>
+      <a class="nav-ops" href="console-ops.html">运维台</a>
+    </nav>
+
+    <div class="page-wrap">
+      <div class="wechat-layout">
+        <section>
+          <p class="eyebrow">日常入口</p>
+          <h1>微信就是你的操作台。</h1>
+          <p class="lead" style="margin-top: 14px">
+            查棚、确认通风、收报警 — 棚主日常都在微信完成。装设备、配账号走运维台。
+          </p>
+
+          <div class="role-tabs" role="tablist">
+            <button
+              type="button"
+              class="role-tab active"
+              data-role="user"
+              role="tab"
+              aria-selected="true"
+            >
+              我是棚主/使用者
+            </button>
+            <button
+              type="button"
+              class="role-tab"
+              data-role="installer"
+              role="tab"
+              aria-selected="false"
+            >
+              我是安装人员
+            </button>
+          </div>
+
+          <div class="role-panel active" id="panel-user">
+            <div class="step-card">
+              <span class="step-id">01</span>
+              <div>
+                <h3>扫码添加场景助手</h3>
+                <p>
+                  微信扫右侧码，添加「守棚工长」等场景助手。没绑定前，助手只会提示你先完成绑定。
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <span class="step-id">02</span>
+              <div>
+                <h3>输入安装人员给的配对码</h3>
+                <p>配对码把你的微信和农场账号连起来，并决定你是棚主还是现场工人。</p>
+              </div>
+            </div>
+            <div class="step-card" style="border-bottom: none">
+              <span class="step-id">03</span>
+              <div>
+                <h3>像聊天一样下指令</h3>
+                <p>
+                  「1 号棚现在几度？」—
+                  查询直接回复；开风机、开通风等动作，按风险等级要你确认后才执行。
+                </p>
+              </div>
+            </div>
+
+            <table class="role-table">
+              <thead>
+                <tr>
+                  <th>能做什么</th>
+                  <th>未绑定</th>
+                  <th>棚主</th>
+                  <th>工人</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>查询棚况</td>
+                  <td>提示先绑定</td>
+                  <td>可以</td>
+                  <td>可以</td>
+                </tr>
+                <tr>
+                  <td>确认控棚</td>
+                  <td>不可以</td>
+                  <td>可以，须确认</td>
+                  <td>默认不可以</td>
+                </tr>
+                <tr>
+                  <td>接收报警</td>
+                  <td>不可以</td>
+                  <td>可以</td>
+                  <td>按配置</td>
+                </tr>
+                <tr>
+                  <td>查看操作记录</td>
+                  <td>不可以</td>
+                  <td>全部</td>
+                  <td>仅本人相关</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="role-panel" id="panel-installer">
+            <div class="step-card">
+              <span class="step-id">01</span>
+              <div>
+                <h3>进入平台底座</h3>
+                <p>
+                  配置大模型 Key、MQTT、deployment_id，完成节点配对。绑定真源在平台底座，不在本页。
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <span class="step-id">02</span>
+              <div>
+                <h3>创建用户并签发配对码</h3>
+                <p>在「用户与绑定」页创建棚主/工人账号，生成配对码供扫码绑定。</p>
+              </div>
+            </div>
+            <div class="step-card" style="border-bottom: none">
+              <span class="step-id">03</span>
+              <div>
+                <h3>验证模拟闭环</h3>
+                <p>
+                  确认 active deployment 节点在线，待确认动作能完整闭环。演示数据须标注「模拟」。
+                </p>
+              </div>
+            </div>
+            <div class="ops-link">
+              <span>节点配对 · 大模型 · MQTT · 用户权限</span>
+              <a href="console-ops.html" style="color: var(--sf-accent); font-weight: 600"
+                >安装与运维 →</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <aside class="qr-panel">
+          <span class="badge badge-live">微信工作区</span>
+          <div class="qr-box">QR / 配对码</div>
+          <p style="font-size: 13px; color: var(--sf-body); margin-top: 8px">
+            正式版读取配置好的二维码；缺失时提示联系安装人员。
+          </p>
+          <div style="margin-top: 20px; text-align: left">
+            <p class="eyebrow" style="margin-bottom: 8px">可以试着说</p>
+            <span class="chip">1 号棚状态？</span>
+            <span class="chip">开通风 10 分钟</span>
+            <span class="chip">二号棚湿度多少？</span>
+          </div>
+          <div class="actions" style="margin-top: 20px; justify-content: center">
+            <a class="btn btn-accent" href="scene-greenhouse.html">看守棚示范话术</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <span>账号绑定在运维台管理</span>
+      <span>日常操作留在微信内</span>
+    </footer>
+
+    <script>
+      document.getElementById("nav-toggle").onclick = () =>
+        document.getElementById("nav").classList.toggle("menu-open");
+      document.querySelectorAll(".role-tab").forEach((tab) => {
+        tab.onclick = () => {
+          document.querySelectorAll(".role-tab").forEach((t) => {
+            t.classList.remove("active");
+            t.setAttribute("aria-selected", "false");
+          });
+          tab.classList.add("active");
+          tab.setAttribute("aria-selected", "true");
+          document.querySelectorAll(".role-panel").forEach((p) => p.classList.remove("active"));
+          document.getElementById("panel-" + tab.dataset.role).classList.add("active");
+        };
+      });
+    </script>
+  </body>
+</html>

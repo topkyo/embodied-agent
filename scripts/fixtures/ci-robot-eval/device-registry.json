@@ -1,0 +1,32 @@
+{
+  "deployments": [
+    {
+      "deployment_id": "dep-robot-ci-001",
+      "name": "Robot CI",
+      "timezone": "Asia/Shanghai",
+      "status": "active"
+    }
+  ],
+  "entities": [],
+  "nodes": [
+    {
+      "node_id": "m20-001",
+      "deployment_id": "dep-robot-ci-001",
+      "name": "M20 CI",
+      "status": "active"
+    }
+  ],
+  "devices": [
+    {
+      "device_id": "m20-001",
+      "deployment_id": "dep-robot-ci-001",
+      "device_type": "robot_dog",
+      "name": "M20 机器狗",
+      "aliases": ["机器狗", "M20"],
+      "node_id": "m20-001",
+      "status": "active",
+      "transport": "m20_http",
+      "default_for": "robot_dog"
+    }
+  ]
+}

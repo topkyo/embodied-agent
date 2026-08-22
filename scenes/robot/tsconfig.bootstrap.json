@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["skills.ts", "schemas/intent-robot.ts", "manifest.ts"]
+}

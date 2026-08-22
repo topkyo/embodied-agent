@@ -1,0 +1,38 @@
+name: Nightly Domain Flywheel
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  domain-flywheel:
+    if: github.repository == 'topkyo/embodied-agent-internal'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Domain flywheel gate (fast)
+        env:
+          DOMAIN_FLYWHEEL_REQUIRED: "1"
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_THINKING: "1"
+          AGENT_DATA_DIR: scripts/fixtures/ci-flywheel
+          SIM_MAX_COMMAND_MS: "8000"
+          SIM_TELEMETRY_SCENARIO: full
+          SIM_TELEMETRY_REACT: "1"
+          FLYWHEEL_DEV: "1"
+          SUSTAINED_L2_COOLDOWN_SECONDS: "0"
+          DEVICE_HEARTBEAT_TIMEOUT_MS: "300000"
+        run: |
+          if [ -z "$LLM_API_KEY" ]; then
+            echo "::error::LLM_API_KEY secret is required for nightly flywheel gate"
+            exit 1
+          fi
+          ./scripts/verify-domain-flywheel-gate.sh

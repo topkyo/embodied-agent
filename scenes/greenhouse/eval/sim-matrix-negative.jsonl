@@ -1,0 +1,6 @@
+{"utterance":"机器狗站起来","expected_skill":"clarification_needed","note":"agriculture active_domain 下不得解析成 robot.stand_up"}
+{"utterance":"M20 去充电桩","expected_skill":"clarification_needed","note":"agriculture active_domain 下不得解析成 robot.navigate_to_waypoint"}
+{"utterance":"吊舱向左转一下","expected_skill":"clarification_needed","note":"agriculture active_domain 下不得解析成 robot.gimbal_move"}
+{"utterance":"播放警报","expected_skill":"clarification_needed","note":"agriculture active_domain 下不得解析成 robot.play_alarm"}
+{"utterance":"不要给A区浇水5分钟","expected_skill":"clarification_needed","note":"structural override 不得把否定灌溉句解析成 irrigation.start"}
+{"utterance":"也是30度","expected_skill":"clarification_needed","note":"无报警上下文时不得触发 alert.set_threshold 续接"}

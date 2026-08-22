@@ -1,0 +1,22 @@
+{"utterance":"看下机器狗现在状态","expected_skill":"robot.query_status","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"M20 的坐标是多少","expected_skill":"robot.query_pose","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"导航任务走到哪了","expected_skill":"robot.query_navigation_status","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"帮我拍张图","expected_skill":"robot.capture_image","expected":{"parameters":{"source":"body"}},"platform":"wechat"}
+{"utterance":"取一下吊舱画面地址","expected_skill":"robot.get_stream_url","expected":{"parameters":{"source":"gimbal"}},"platform":"wechat"}
+{"utterance":"站起来","expected_skill":"robot.stand_up","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"趴下休息","expected_skill":"robot.sit_down","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"往前挪一秒","expected_skill":"robot.move","expected":{"parameters":{"duration_ms":1000}},"platform":"wechat"}
+{"utterance":"去 dock","expected_skill":"robot.navigate_to_waypoint","expected":{"parameters":{"waypoint_id":"dock"}},"platform":"wechat"}
+{"utterance":"别导航了","expected_skill":"robot.cancel_navigation","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"喊一下 请远离机器人","expected_skill":"robot.speak","expected":{"parameters":{"text":"请远离机器人"}},"platform":"wechat"}
+{"utterance":"把喇叭音量设成 70","expected_skill":"robot.set_volume","expected":{"parameters":{"volume":70}},"platform":"wechat"}
+{"utterance":"开工作灯","expected_skill":"robot.set_light","expected":{"parameters":{"light":"work"}},"platform":"wechat"}
+{"utterance":"打开红蓝警示灯","expected_skill":"robot.set_light","expected":{"parameters":{"light":"red_blue"}},"platform":"wechat"}
+{"utterance":"拉警报","expected_skill":"robot.play_alarm","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"警报停掉","expected_skill":"robot.stop_alarm","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"云台回中","expected_skill":"robot.gimbal_center","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"吊舱往右转一下","expected_skill":"robot.gimbal_move","expected":{"parameters":{"direction":"right"}},"platform":"wechat"}
+{"utterance":"镜头拉近","expected_skill":"robot.gimbal_zoom","expected":{"parameters":{"action":"in"}},"platform":"wechat"}
+{"utterance":"测一下距离","expected_skill":"robot.gimbal_laser_range","expected":{"target":{}},"platform":"wechat"}
+{"utterance":"到充电桩看看并取证","expected_skill":"robot.start_inspection","expected":{"parameters":{"waypoint_id":"dock","source":"body"}},"platform":"wechat"}
+{"utterance":"机器人巡检异常有什么建议","expected_skill":"robot.query_inspection_summary","expected":{"target":{}},"platform":"wechat"}

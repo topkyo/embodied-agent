@@ -1,0 +1,33 @@
+{
+  "packs": [
+    {
+      "id": "agriculture",
+      "module": "@embodied-agent/domain-agriculture",
+      "displayName": "农业领域",
+      "webSlug": "greenhouse",
+      "status": "live"
+    },
+    {
+      "id": "robotics",
+      "module": "@embodied-agent/domain-robotics",
+      "displayName": "机器人领域",
+      "webSlug": "robot",
+      "status": "live",
+      "adminRouteModule": "@embodied-agent/domain-robotics/admin-routes"
+    },
+    {
+      "id": "industrial",
+      "module": "@embodied-agent/domain-industrial",
+      "displayName": "工业安能卫士",
+      "webSlug": "industrial",
+      "status": "live"
+    },
+    {
+      "id": "aquaculture",
+      "module": "@embodied-agent/domain-aquaculture",
+      "displayName": "水产管家",
+      "webSlug": "aquaculture",
+      "status": "placeholder"
+    }
+  ]
+}

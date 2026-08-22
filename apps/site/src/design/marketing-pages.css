@@ -1,0 +1,1450 @@
+/* v3.1 marketing page layouts — from apps/web/prototypes/ */
+
+.marketing-shell--flush .marketing-main {
+  max-width: none;
+  padding: 0;
+}
+
+.eyebrow,
+.label {
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sf-mute);
+}
+
+.eyebrow.on-dark,
+.label.on-dark {
+  color: var(--sf-gray-400);
+}
+
+.display {
+  font-size: clamp(36px, 6.5vw, 72px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.6;
+  color: var(--sf-body);
+  max-width: 640px;
+}
+
+.lead.on-dark {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 20px;
+  border-radius: var(--sf-radius);
+  border: 1px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease,
+    opacity 0.15s ease;
+  text-decoration: none;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--sf-accent);
+  outline-offset: 2px;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--sf-white);
+  color: var(--sf-black);
+  border-color: var(--sf-white);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--sf-gray-100, #f0f2ee);
+  border-color: var(--sf-gray-100, #f0f2ee);
+}
+
+.btn-accent {
+  background: var(--sf-accent);
+  color: var(--sf-white);
+  border-color: var(--sf-accent);
+}
+
+.btn-accent:hover:not(:disabled) {
+  background: var(--sf-accent-bright, #2aa36c);
+  border-color: var(--sf-accent-bright, #2aa36c);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--sf-white);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--sf-ink);
+  border-color: var(--sf-line);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--sf-gray-50, #f7f8f5);
+  border-color: var(--sf-mute);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.section {
+  padding: clamp(64px, 10vw, 120px) clamp(20px, 4vw, 48px);
+  max-width: var(--sf-max);
+  margin: 0 auto;
+}
+
+.section.full {
+  max-width: none;
+}
+
+.section-nested {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.section.alt {
+  background: var(--sf-gray-50);
+}
+
+.section.dark {
+  background: linear-gradient(180deg, var(--sf-green-950) 0%, var(--sf-green-900) 100%);
+  color: var(--sf-hero-fg);
+}
+
+.section-head {
+  margin-bottom: clamp(32px, 5vw, 56px);
+  max-width: 720px;
+}
+
+.section-head .eyebrow {
+  color: var(--sf-accent);
+}
+
+.section-head .lead {
+  margin-top: 14px;
+  max-width: 58ch;
+  font-size: clamp(16px, 2.1vw, 19px);
+  line-height: 1.65;
+  color: var(--sf-gray-600);
+}
+
+.section-lead-duo {
+  margin-top: 14px;
+  max-width: 58ch;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-lead-duo .lead-punch {
+  margin: 0;
+  font-size: clamp(16px, 2.1vw, 19px);
+  line-height: 1.55;
+  font-weight: 600;
+  color: var(--sf-ink);
+}
+
+.section-lead-duo .lead-flow {
+  margin: 0;
+  font-family: var(--sf-mono);
+  font-size: 13px;
+  line-height: 1.65;
+  letter-spacing: 0.02em;
+  color: var(--sf-gray-600);
+}
+
+.section.dark .section-head .eyebrow {
+  color: var(--sf-accent-bright);
+}
+
+.section.dark .section-head .lead {
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 58ch;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--sf-line);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--sf-line);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--sf-line);
+}
+
+.grid-4 > *,
+.grid-3 > *,
+.grid-2 > * {
+  background: var(--sf-canvas);
+}
+
+.section.dark .grid-4,
+.section.dark .grid-3,
+.section.dark .grid-2 {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.section.dark .grid-4 > *,
+.section.dark .grid-3 > *,
+.section.dark .grid-2 > * {
+  background: var(--sf-black);
+}
+
+/* Platform hero — DESIGN §平台首页：左深右透 + 右列拓扑；环境光 token 见 tokens.css */
+.hero-platform {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  color: var(--sf-hero-fg);
+  background: transparent;
+}
+
+.hero-platform::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    var(--sf-platform-hero-copy-scrim), var(--sf-platform-hero-readability),
+    var(--sf-platform-hero-depth), var(--sf-platform-hero-glow), var(--sf-platform-hero-edge),
+    var(--sf-platform-hero-bed);
+}
+
+/* 工程网格叠在环境光之上、canvas 之下（::after 同 z-index 会盖住 ::before） */
+.hero-platform::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: var(--sf-platform-hero-grid);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.5) 38%, black 54%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.5) 38%, black 54%);
+  opacity: 1;
+}
+
+.platform-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 28%,
+    black 44%,
+    black 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.35) 28%,
+    black 44%,
+    black 100%
+  );
+}
+
+.platform-canvas--static {
+  background:
+    var(--sf-platform-hero-readability), var(--sf-platform-hero-depth),
+    var(--sf-platform-hero-glow), var(--sf-platform-hero-edge), var(--sf-platform-hero-bed);
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.hero-platform .hero-inner {
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 580px) minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  gap: clamp(28px, 4vw, 48px) clamp(20px, 5vw, 64px);
+  padding: calc(var(--sf-nav-h) + 56px) clamp(20px, 4vw, 48px) clamp(28px, 5vw, 48px);
+  max-width: none;
+}
+
+.hero-copy {
+  max-width: 580px;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+.hero-platform .eyebrow {
+  color: var(--sf-platform-hero-mint);
+  margin-bottom: 18px;
+}
+
+.hero-platform .display {
+  margin-bottom: 18px;
+  color: var(--sf-white);
+  text-shadow: 0 1px 24px rgba(6, 11, 9, 0.45);
+}
+
+.hero-platform .lead.on-dark {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.hero-platform .lead {
+  margin-bottom: 26px;
+}
+
+.hero-copy .proof-panel {
+  margin-top: 22px;
+  width: min(420px, 100%);
+}
+
+.hw-tile,
+.scene-tile {
+  display: block;
+  padding: 24px 20px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  text-decoration: none;
+  color: inherit;
+}
+
+.scene-tile h3,
+.hw-tile h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.flywheel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+
+.fly-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fly-step:last-child {
+  border-bottom: none;
+}
+
+.fly-step-id {
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  color: var(--sf-accent-bright);
+  padding-top: 2px;
+}
+
+.fly-step h4 {
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.fly-step p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.telemetry-card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--sf-radius);
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.telemetry-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+}
+
+.telemetry-row:last-child {
+  border-bottom: none;
+}
+
+.telemetry-row a {
+  color: var(--sf-accent-bright);
+  font-family: var(--sf-mono);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px clamp(20px, 4vw, 48px);
+  border-top: 1px solid var(--sf-line);
+  font-size: 12px;
+  color: var(--sf-mute);
+  max-width: var(--sf-max);
+  margin: 0 auto;
+}
+
+.site-footer a {
+  color: var(--sf-body);
+  text-decoration: none;
+}
+
+/* Page hero (scenes list, nodes) */
+.page-hero {
+  padding: calc(var(--sf-nav-h) + 72px) clamp(20px, 4vw, 48px) 56px;
+  text-align: center;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+.page-hero h1 {
+  font-size: clamp(32px, 5vw, 52px);
+  margin-bottom: 12px;
+}
+
+.page-hero .lead {
+  margin: 0 auto;
+}
+
+.page-hero--dark {
+  background: linear-gradient(180deg, var(--sf-green-900) 0%, var(--sf-green-800) 100%);
+  color: var(--sf-hero-fg);
+  border-bottom: none;
+}
+
+.page-hero--dark .lead {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.page-hero--dark .eyebrow {
+  color: var(--sf-accent-bright);
+  margin-bottom: 16px;
+}
+
+/* Scenes list */
+.rank-note {
+  text-align: center;
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  color: var(--sf-mute);
+  padding: 20px 0 8px;
+  letter-spacing: 0.06em;
+}
+
+.rank-note--spaced {
+  margin-top: 32px;
+}
+
+.value-tag strong {
+  color: var(--sf-ink);
+}
+
+.scene-list {
+  max-width: var(--sf-max);
+  margin: 0 auto;
+  padding: 8px clamp(20px, 4vw, 48px) 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scene-card {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-canvas);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s;
+}
+
+.scene-card:hover {
+  border-color: var(--sf-gray-400);
+}
+
+.scene-card:focus-visible {
+  outline: 2px solid var(--sf-accent);
+  outline-offset: 2px;
+}
+
+.scene-card.featured {
+  border-color: var(--sf-accent);
+  border-width: 2px;
+  background: linear-gradient(180deg, rgba(31, 138, 91, 0.06) 0%, var(--sf-canvas) 48%);
+  box-shadow: 0 0 0 1px rgba(31, 138, 91, 0.12);
+}
+
+.scene-card .thumb {
+  height: 108px;
+  border-radius: var(--sf-radius);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--sf-gray-100);
+}
+
+.scene-card .thumb--farm {
+  background-image: url("../assets/greenhouse-aiot-hero.jpg");
+}
+
+/* trial(vision-assets-cherry-pick): /scenes 列表 thumb 接 vision 资产 */
+.scene-card .thumb--robot {
+  background-image: url("../assets/vision/card-robot.jpg");
+}
+
+.scene-card .thumb--industrial {
+  background-image: url("../assets/vision/card-industrial.jpg");
+}
+
+.scene-card .thumb--aquaculture {
+  background: linear-gradient(135deg, #0c4a6e, #082f49);
+}
+
+.scene-list-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 0 clamp(20px, 4vw, 48px) 8px;
+  font-size: 13px;
+  color: var(--sf-mute);
+}
+
+.scene-list-status--error {
+  color: var(--sf-red, #c0392b);
+}
+
+.scene-list-status .btn {
+  min-height: 32px;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.scene-card-badge-skeleton {
+  display: inline-block;
+  width: 3.5rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--sf-gray-100, #eef1ee) 25%,
+    var(--sf-gray-50, #f7f8f5) 50%,
+    var(--sf-gray-100, #eef1ee) 75%
+  );
+  background-size: 200% 100%;
+  animation: scene-skel 1.2s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-card-badge-skeleton {
+    animation: none;
+  }
+}
+
+@keyframes scene-skel {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.scene-card h2 {
+  font-size: 19px;
+  margin: 8px 0 6px;
+}
+
+.scene-card .desc {
+  font-size: 14px;
+  color: var(--sf-body);
+  margin-bottom: 8px;
+}
+
+.value-tag {
+  font-size: 12px;
+  color: var(--sf-mute);
+}
+
+.hw-tag {
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  color: var(--sf-mute);
+  margin-top: 4px;
+}
+
+/* Scene detail */
+.scene-page {
+  --scene-accent: #1f8a5b;
+  --scene-accent-bright: #78d691;
+}
+
+/* greenhouse scene hero keeps the original 实景图 (greenhouse-aiot-hero.jpg);
+   vision set 仅供 robot / industrial 与三域卡片引用，不替换守棚 hero。 */
+/* v0.9.2 hotfix: cherry-pick c4d4f89 (commit `扩展 vision 资产接入 / 与 /scenes 列表`) 把这个
+   .scene-page--greenhouse { --gh-hero-img: url(...) } CSS block 替换为注释，导致 /scenes/greenhouse
+   hero 的 --gh-hero-img 为 none + computed background-image 解析为 "linear-gradient, none"。
+   这里把 v0.9.1 baseline 的 url() 赋值恢复，确保 hero 显示原 greenhouse-aiot-hero.jpg。 */
+.scene-page--greenhouse {
+  --gh-hero-img: url("../assets/greenhouse-aiot-hero.jpg");
+}
+
+.grid-cards-loose {
+  gap: 12px;
+  background: transparent;
+}
+
+.skill-row:last-child {
+  border-bottom: none;
+}
+
+.pilot-card-desc {
+  margin-top: 12px;
+  line-height: 1.8;
+}
+
+.pilot-card-highlight {
+  border-left: 3px solid var(--sf-accent);
+}
+
+.pilot-footer {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--sf-mute);
+}
+
+.link-accent {
+  color: var(--sf-accent);
+}
+
+.link-accent-strong {
+  color: var(--sf-accent);
+  font-weight: 500;
+}
+
+.scene-page--robot {
+  --scene-accent: #64748b;
+  --scene-accent-bright: #94a3b8;
+  --scene-hero-bg: #1e293b;
+  /* trial(vision-assets-cherry-pick): vision card robot 在 gradient 上层 */
+  --scene-hero-bg-image:
+    url("../assets/vision/card-robot.jpg"),
+    linear-gradient(135deg, #334155 0%, #1e293b 55%, #0f172a 100%);
+}
+
+.scene-page--industrial {
+  --scene-accent: #3b82f6;
+  --scene-accent-bright: #60a5fa;
+  --scene-hero-bg: #0f172a;
+  /* trial(vision-assets-cherry-pick): vision card industrial 在 gradient 上层 */
+  --scene-hero-bg-image:
+    url("../assets/vision/card-industrial.jpg"),
+    linear-gradient(135deg, #1e293b 0%, #0f172a 55%, #0c1222 100%);
+}
+
+.scene-page--aquaculture {
+  --scene-accent: #0891b2;
+  --scene-accent-bright: #22d3ee;
+  --scene-hero-bg: #082f49;
+  --scene-hero-bg-image: linear-gradient(135deg, #0c4a6e 0%, #082f49 55%, #042f2e 100%);
+}
+
+.scene-page--coldchain {
+  --scene-accent: #2563eb;
+  --scene-accent-bright: #60a5fa;
+  --scene-hero-bg: #0f172a;
+  --scene-hero-bg-image: linear-gradient(135deg, #1e3a5f 0%, #0f172a 55%, #0c1222 100%);
+}
+
+.scene-explore-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 clamp(20px, 4vw, 48px) 48px;
+}
+
+.wechat-bind--compact h2 {
+  display: none;
+}
+
+.wechat-bind--compact .qr-wrap {
+  margin-top: 8px;
+}
+
+.scene-page--elderly {
+  --scene-accent: #d97706;
+  --scene-accent-bright: #fbbf24;
+  --scene-hero-bg: #1c1917;
+  --scene-hero-bg-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.78));
+}
+
+.scene-page--pet {
+  --scene-accent: #ca8a04;
+  --scene-accent-bright: #facc15;
+  --scene-hero-bg: #422006;
+  --scene-hero-bg-image: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.78));
+}
+
+.scene-hero .display,
+.hero-greenhouse .display {
+  font-size: clamp(32px, 5.5vw, 56px);
+}
+
+.scene-hero .lead.on-dark,
+.hero-greenhouse .lead.on-dark {
+  margin-bottom: 22px;
+}
+
+.hero-greenhouse {
+  position: relative;
+  overflow: hidden;
+  color: var(--sf-hero-fg);
+  background-color: var(--sf-green-900);
+  --gh-hero-overlay: linear-gradient(
+    90deg,
+    rgba(7, 22, 18, 0.92) 0%,
+    rgba(7, 22, 18, 0.58) 30%,
+    rgba(7, 22, 18, 0.14) 46%,
+    transparent 52%
+  );
+  background-image: var(--gh-hero-overlay), var(--gh-hero-img);
+  background-position:
+    center,
+    88% center;
+  background-size: cover, cover;
+}
+
+.hero-greenhouse .hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, min(540px, 48vw)) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: start;
+  gap: clamp(20px, 3vw, 28px) clamp(32px, 10vw, 140px);
+  min-height: min(100vh, 920px);
+  padding: calc(var(--sf-nav-h) + 56px) clamp(20px, 4vw, 48px) clamp(40px, 6vw, 64px);
+}
+
+.hero-greenhouse .hero-copy {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 540px;
+}
+
+.hero-greenhouse .wechat-clawbot-panel {
+  grid-column: 1;
+  grid-row: 2;
+  width: min(400px, 100%);
+  align-self: start;
+}
+
+.hero-proof-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-proof-line a {
+  color: var(--sf-accent-bright);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.scene-hero {
+  position: relative;
+  /* v0.9.2.3: 与 .hero-greenhouse 对齐 hero 高度，让 robot / industrial hero box 视觉与守棚 hero 等高 */
+  min-height: min(100vh, 920px);
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--sf-nav-h) + 48px) clamp(20px, 4vw, 48px) clamp(56px, 8vw, 96px);
+  color: var(--sf-white);
+  background-color: var(--scene-hero-bg, var(--sf-green-900));
+  background-image: var(--scene-hero-bg-image, none);
+  background-size: cover;
+  background-position: center;
+}
+
+.scene-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* v0.9.2.3: 减弱暗蒙版，让 vision card-robot / card-industrial 在 robot/industrial hero 上视觉占比更明显。
+     on-dark 文案仍可读 (rgba 0.55 在 1040+ 字网 AA 上满足对比)。 */
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+.scene-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.scene-id {
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--scene-accent-bright, var(--sf-accent-bright));
+  margin-bottom: 16px;
+}
+
+.scene-section {
+  padding: clamp(64px, 8vw, 100px) clamp(20px, 4vw, 48px);
+  max-width: var(--sf-max);
+  margin: 0 auto;
+}
+
+.scene-section.alt {
+  background: var(--sf-gray-50);
+}
+
+.scene-section.dark {
+  background: linear-gradient(180deg, var(--sf-green-950) 0%, var(--sf-green-900) 100%);
+  color: var(--sf-hero-fg);
+}
+
+.scene-section h2 {
+  font-size: clamp(24px, 3.5vw, 36px);
+  margin-bottom: 8px;
+}
+
+.scene-section .sub {
+  color: var(--sf-body);
+  font-size: 15px;
+  margin-bottom: 32px;
+  max-width: 560px;
+}
+
+.scene-section.dark .sub {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.trio-card {
+  padding: 28px 24px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-canvas);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* trial(vision-assets-cherry-pick): 平台首页三域 LIVE 卡接 vision 资产
+   (greenhouse 用原图 greenhouse-aiot-hero.jpg；robot/industrial 用 vision 集) */
+.trio-card-img {
+  display: block;
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: calc(var(--sf-radius) - 1px);
+  background-color: var(--sf-gray-100, #eef0eb);
+}
+
+.trio-card .num {
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  color: var(--scene-accent, var(--sf-accent));
+  margin-bottom: 12px;
+}
+
+.trio-card h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.trio-card p {
+  font-size: 14px;
+  color: var(--sf-body);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.skill-row {
+  display: grid;
+  grid-template-columns: minmax(160px, 220px) 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+}
+
+.skill-row code {
+  font-family: var(--sf-mono);
+  font-size: 11px;
+  color: var(--scene-accent-bright, var(--sf-accent-bright));
+}
+
+.skill-row span:last-child {
+  font-family: var(--sf-mono);
+  font-size: 10px;
+  color: var(--sf-gray-400);
+}
+
+/* Nodes */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-canvas);
+}
+
+.product-visual {
+  height: 96px;
+  border-radius: var(--sf-radius);
+  display: grid;
+  place-items: center;
+  font-family: var(--sf-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+
+.product-visual.exec {
+  background: var(--sf-black);
+  color: var(--sf-gray-400);
+}
+
+.product-visual.io {
+  background: var(--sf-gray-100);
+  color: var(--sf-gray-600);
+}
+
+.product-visual.sensor {
+  background: var(--sf-green-900);
+  color: var(--sf-accent-bright);
+}
+
+.product-visual.vision {
+  background: #0f172a;
+  color: #93c5fd;
+}
+
+.product-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.product h3 {
+  font-size: 17px;
+  margin: 0;
+}
+
+.soc {
+  font-family: var(--sf-mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  background: var(--sf-gray-100);
+  color: var(--sf-body);
+  border-radius: var(--sf-radius);
+}
+
+.product .role {
+  font-size: 14px;
+  color: var(--sf-body);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.periph {
+  font-size: 11px;
+  padding: 4px 10px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  color: var(--sf-body);
+  display: inline-block;
+  margin: 0 4px 4px 0;
+}
+
+.demo-link {
+  font-size: 12px;
+  color: var(--sf-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* WeChat start */
+/* Inside MarketingLayout the sticky nav already occupies the top band. */
+.marketing-main .page-hero {
+  padding-top: 72px;
+}
+
+.marketing-main .page-wrap {
+  padding-top: 48px;
+}
+
+.page-wrap {
+  padding: calc(var(--sf-nav-h) + 48px) clamp(20px, 4vw, 48px) 80px;
+  max-width: var(--sf-max);
+  margin: 0 auto;
+}
+
+.wechat-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 320px);
+  gap: clamp(32px, 5vw, 56px);
+  align-items: start;
+}
+
+.wechat-start .lead {
+  margin-top: 14px;
+  max-width: 36em;
+}
+
+.wechat-note {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.wechat-start .role-tabs {
+  margin-top: 28px;
+  margin-bottom: 0;
+}
+
+.wechat-role-label {
+  margin-top: 28px;
+  margin-bottom: 0;
+}
+
+.wechat-role-hint {
+  font-size: 14px;
+  margin-top: 16px;
+  max-width: 32em;
+  line-height: 1.55;
+}
+
+.wechat-shared-bind {
+  font-size: 13px;
+  margin-top: 12px;
+  color: var(--sf-accent);
+}
+
+.wechat-continue {
+  margin-top: 16px;
+  justify-content: center;
+}
+
+.wechat-connected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 12px 0 0;
+}
+
+.wechat-picker-label {
+  margin-top: 24px;
+  margin-bottom: 10px;
+}
+
+.wechat-scene-target {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.wechat-bind-scene {
+  font-size: 13px;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.platform-bind--compact .platform-bind-instructions {
+  font-size: 12px;
+  text-align: left;
+  margin-top: 8px;
+}
+
+.platform-bind-issue {
+  margin: 12px 0;
+  text-align: center;
+}
+
+.platform-bind-code {
+  text-align: center;
+}
+
+.platform-bind-code-value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  font-family: var(--sf-mono);
+}
+
+.platform-bind-code-expires {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.platform-bind-compact-claim {
+  margin-top: 12px;
+  text-align: left;
+}
+
+.platform-bind-compact-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.platform-bind-compact-label input {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.wechat-bind--compact .wechat-actions {
+  margin-top: 10px;
+}
+
+.wechat-bind--compact .qr-hint {
+  font-size: 12px;
+}
+
+.scene-pack-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scene-pack-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-canvas);
+  font-size: 13px;
+  font-family: var(--sf-sans);
+  color: var(--sf-body);
+  cursor: pointer;
+}
+
+.scene-pack-option.active {
+  border-color: var(--sf-accent);
+  background: var(--sf-accent-soft);
+  color: var(--sf-ink);
+}
+
+.scene-pack-option--disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.scene-pack-option-name {
+  font-weight: 500;
+}
+
+.scene-pack-picker--explore {
+  margin-top: 0;
+}
+
+.scene-pack-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.scene-pack-link:hover {
+  border-color: var(--sf-accent);
+  color: var(--sf-ink);
+}
+
+.role-tabs {
+  display: inline-flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+.role-tab {
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sf-mute);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--sf-sans);
+}
+
+.role-tab.active {
+  color: var(--sf-ink);
+  border-bottom-color: var(--sf-accent);
+}
+
+.role-panel {
+  display: none;
+}
+
+.role-panel.active {
+  display: block;
+}
+
+.step-card {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+.step-id {
+  font-family: var(--sf-mono);
+  font-size: 12px;
+  color: var(--sf-accent);
+  padding-top: 2px;
+}
+
+.step-card h3 {
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.step-card p {
+  font-size: 14px;
+  color: var(--sf-body);
+  margin: 0;
+}
+
+.role-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 32px;
+}
+
+.role-table th,
+.role-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+.role-table th {
+  font-family: var(--sf-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sf-mute);
+  font-weight: 500;
+}
+
+.qr-panel {
+  position: sticky;
+  top: calc(var(--sf-nav-h) + 24px);
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  padding: 28px 24px;
+  text-align: center;
+  background: var(--sf-canvas);
+}
+
+.qr-box {
+  width: 180px;
+  height: 180px;
+  margin: 20px auto;
+  border: 1px dashed var(--sf-line);
+  border-radius: var(--sf-radius);
+  display: grid;
+  place-items: center;
+  font-family: var(--sf-mono);
+  font-size: 10px;
+  color: var(--sf-mute);
+  background: var(--sf-gray-50);
+}
+
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  padding: 6px 12px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  margin: 4px 4px 0 0;
+}
+
+.ops-link {
+  margin-top: 32px;
+  padding: 16px 20px;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .hero-platform .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero-copy {
+    align-self: start;
+  }
+
+  .hero-copy .proof-panel {
+    width: 100%;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .flywheel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wechat-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-greenhouse {
+    background-position:
+      center,
+      72% center;
+  }
+
+  .hero-greenhouse .hero-inner {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 24px;
+    min-height: auto;
+  }
+
+  .hero-greenhouse .hero-copy,
+  .hero-greenhouse .wechat-clawbot-panel {
+    grid-column: 1;
+    max-width: none;
+    width: 100%;
+  }
+
+  .hero-greenhouse .wechat-clawbot-panel {
+    grid-row: 2;
+  }
+
+  .scene-card {
+    grid-template-columns: 1fr;
+  }
+
+  .scene-card .thumb {
+    height: 140px;
+  }
+
+  .hero-copy,
+  .hero-platform .hero-inner,
+  .scene-list {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .product {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-4,
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}

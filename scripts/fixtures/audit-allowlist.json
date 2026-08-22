@@ -1,0 +1,13 @@
+{
+  "note": "Remaining high advisories are vercel CLI transitives that still lack a patched parent (minimatch / path-to-regexp / undici 5.x WebSocket). tar, js-yaml, ip-address, nanoid, find-my-way, react-router, fast-uri, and undici 7.x are pinned via package.json overrides. New high/critical advisories must not be added here without review.",
+  "allowlist": [
+    "GHSA-23c5-xmqv-rm74",
+    "GHSA-3ppc-4f35-3m26",
+    "GHSA-7r86-cg39-jmmj",
+    "GHSA-9wv6-86v2-598j",
+    "GHSA-j3q9-mxjg-w52f",
+    "GHSA-v9p9-hfj2-hcw8",
+    "GHSA-vrm6-8vpv-qv8q",
+    "GHSA-vxpw-j846-p89q"
+  ]
+}

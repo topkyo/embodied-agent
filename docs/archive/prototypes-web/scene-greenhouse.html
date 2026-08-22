@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>守棚工长 — 具身Agent LIVE 场景</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preload" as="image" href="assets/greenhouse-hero.jpg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .hero-greenhouse {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        color: var(--sf-hero-fg);
+        background-color: var(--sf-green-900);
+        background-image: var(--sf-hero-overlay), url("assets/greenhouse-hero.jpg");
+        background-position:
+          72% center,
+          72% center;
+        background-size: cover, cover;
+      }
+
+      .hero-greenhouse .hero-inner {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        padding: calc(var(--sf-nav-h) + 56px) clamp(20px, 4vw, 48px) clamp(200px, 28vw, 280px);
+      }
+
+      .hero-copy {
+        max-width: 560px;
+      }
+      .hero-proof-line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 26px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .hero-proof-line a {
+        color: var(--sf-accent-bright);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .hero-greenhouse .proof-panel {
+        position: absolute;
+        left: clamp(20px, 4vw, 48px);
+        bottom: clamp(28px, 5vw, 48px);
+        z-index: 2;
+        width: min(400px, calc(100% - 40px));
+      }
+
+      .hero-greenhouse .proof-panel .event-list {
+        padding: 10px 12px;
+      }
+      .hero-greenhouse .proof-panel .event {
+        padding: 8px 10px;
+      }
+
+      @media (max-width: 900px) {
+        .hero-greenhouse {
+          background-position:
+            center center,
+            center center;
+        }
+        .hero-greenhouse .hero-inner {
+          padding-bottom: 420px;
+        }
+      }
+    </style>
+  </head>
+  <body class="scene-greenhouse">
+    <nav class="nav-scene">
+      <a href="scenes.html" style="font-weight: 600">← 能力示范</a>
+      <a href="platform-home.html" class="brand" style="font-size: 13px">
+        <span class="brand-mark" style="width: 24px; height: 24px; font-size: 10px">EA</span>
+        <span>具身Agent</span>
+      </a>
+    </nav>
+
+    <header class="hero-greenhouse">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="scene-id">守棚工长 · LIVE · 能力示范</p>
+          <h1 class="display" style="font-size: clamp(32px, 5.5vw, 56px)">
+            少跑一趟棚，<br />也不错过一次变天。
+          </h1>
+          <p class="lead on-dark" style="margin-bottom: 22px">
+            人在别处，微信查温度、确认通风、收报警。叠加安装，不替换现有 PLC 或厂家一体机。
+          </p>
+          <div class="hero-proof-line">
+            <span class="badge badge-live">模拟证据</span>
+            <span>gh-001 / gh-002</span>
+            <a href="#pilot">试点边界 →</a>
+          </div>
+          <div class="actions">
+            <a class="btn btn-primary" href="start-wechat.html">微信开始用</a>
+            <a class="btn btn-ghost" href="platform-home.html">了解平台底座</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="proof-panel" aria-label="守棚工长 gh-001 状态（模拟）">
+        <div class="panel-top">
+          <span>gh-001 · 守棚工长</span>
+          <span class="status-dot">在线</span>
+        </div>
+        <div class="metric-grid">
+          <div class="metric"><span>TEMP</span><strong>31.2°C</strong></div>
+          <div class="metric"><span>HUMID</span><strong>78%</strong></div>
+          <div class="metric"><span>RISK</span><strong>L2</strong></div>
+        </div>
+        <div class="event-list">
+          <div class="event">
+            <code>intent</code>
+            <p>1 号棚太热了，开通风 10 分钟。</p>
+          </div>
+          <div class="event">
+            <code>guard</code>
+            <p>需确认 · 权限与互锁通过。</p>
+          </div>
+          <div class="event">
+            <code>outcome</code>
+            <p>模拟：降温 0.7°C（待现场校准）。</p>
+          </div>
+        </div>
+        <p class="disclaimer">双棚模拟联调数据，不作 ROI 或效果承诺。</p>
+      </aside>
+    </header>
+
+    <section class="scene-section">
+      <p class="eyebrow">日常怎么用</p>
+      <h2>守棚三件套</h2>
+      <p class="sub">查 · 控 · 警 + 记 —— 发生在微信，不在复杂后台。</p>
+      <div class="grid-3" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <div class="num">01 查</div>
+          <h3>随时问棚</h3>
+          <p>温湿度、设备状态、最近动作，自然语言即可。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">02 控</div>
+          <h3>确认后执行</h3>
+          <p>通风、风机须先确认再下发，全程留痕。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">03 警 + 记</div>
+          <h3>主动提醒</h3>
+          <p>超温高湿推送微信，操作记录可追溯。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section dark">
+      <p class="eyebrow on-dark">场景技能</p>
+      <h2>不是裸命令，是带复盘窗口的技能包。</h2>
+      <p class="sub">每个技能有触发条件、风险等级、确认策略和效果观察窗口。</p>
+      <div>
+        <div class="skill-row">
+          <code>high_temp_emergency_response</code><span>高温应急：持续高温建议通风/风机组合</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>humidity_mildew_prevention</code><span>高湿防霉：高湿叠加通风不足时预警</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>night_ventilation_control</code><span>夜间通风控温：须用户确认后进入</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>post_irrigation_ventilation</code><span>灌后通风：灌溉完成后建议短时通风</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>cold_wave_protection</code><span>寒潮防护：结合天气预报与棚内状态</span
+          ><span>L2</span>
+        </div>
+        <div class="skill-row">
+          <code>morning_dew_reduction</code><span>清晨降露：结露风险时段通风建议</span
+          ><span>L1</span>
+        </div>
+        <div class="skill-row" style="border-bottom: none">
+          <code>device_efficiency_diagnosis</code><span>设备效率诊断：效果差时触发复盘</span
+          ><span>L1</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section alt" id="pilot">
+      <p class="eyebrow">试点边界</p>
+      <h2>卖的是少跑棚，不是无人农场。</h2>
+      <p class="sub">叠加安装，保留原有定时器与一体机。没有明显效果，不强行收费。</p>
+      <div class="grid-2" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <h3>每棚最低配置</h3>
+          <p style="margin-top: 12px; line-height: 1.8; color: var(--sf-body)">
+            1 路温湿度 · 1 个通风控制点 · 1 台 Scene Node · 微信绑定与 10 分钟培训
+          </p>
+        </div>
+        <div class="trio-card" style="border-left: 3px solid var(--sf-accent)">
+          <h3>成功标准</h3>
+          <p style="margin-top: 12px; color: var(--sf-body)">
+            1–2 座棚、4–8 周对比基线：跑棚次数下降、响应更快、无危险误动作。权限见
+            <a href="console-ops-users.html" style="color: var(--sf-accent)">运维台 · 用户</a>。
+          </p>
+        </div>
+      </div>
+      <p style="margin-top: 32px; text-align: center; font-size: 14px; color: var(--sf-mute)">
+        守棚工长是具身智能体平台的首个 LIVE 场景。<a
+          href="platform-home.html"
+          style="color: var(--sf-accent); font-weight: 500"
+          >回平台首页 →</a
+        >
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      <span>日常查控请用微信</span>
+      <a href="console-ops.html" style="color: var(--sf-body)">安装走运维台</a>
+    </footer>
+  </body>
+</html>

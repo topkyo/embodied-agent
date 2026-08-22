@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>宠物助手 — 具身Agent 能力示范</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="_shared.css" />
+    <style>
+      .hero-pet {
+        background-image:
+          var(--scene-overlay),
+          url("https://images.unsplash.com/photo-1450778862545-aa2646fbe5a5?w=1600&q=80");
+        background-color: #422006;
+      }
+      .hero-proof-line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 26px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+      .boundary-note {
+        padding: 20px 24px;
+        border: 1px solid var(--sf-line);
+        border-radius: var(--sf-radius);
+        background: var(--sf-canvas);
+        font-size: 14px;
+        color: var(--sf-body);
+        line-height: 1.65;
+      }
+    </style>
+  </head>
+  <body class="scene-pet">
+    <nav class="nav-scene">
+      <a href="scenes.html" style="font-weight: 600">← 能力示范</a>
+      <a href="platform-home.html" class="brand" style="font-size: 13px">
+        <span class="brand-mark" style="width: 24px; height: 24px; font-size: 10px">EA</span>
+        <span>具身Agent</span>
+      </a>
+    </nav>
+
+    <header class="scene-hero hero-pet">
+      <div class="scene-hero-inner">
+        <p class="scene-id">宠物助手 · EXPLORE · 能力示范</p>
+        <h1 class="display" style="font-size: clamp(32px, 5.5vw, 48px)">
+          猫房环境，<br />微信问一句就懂。
+        </h1>
+        <p class="lead on-dark" style="margin-bottom: 22px">
+          温湿度提醒、喂食日程、摄像头联动（预留）。传播友好，验证「同一底座多场景」故事，非近期主战场。
+        </p>
+        <div class="hero-proof-line">
+          <span class="badge badge-explore">EXPLORE</span>
+          <span>仅占位，无试点承诺</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-ghost" href="scenes.html">看其他示范</a>
+          <a class="btn btn-primary" href="nodes.html#pet-env">看入门硬件</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="scene-section">
+      <p class="eyebrow">能做什么</p>
+      <h2>轻量三件事</h2>
+      <p class="sub">门槛低、分享友好 —— 用来证明平台可延展，不是用来冲营收。</p>
+      <div class="grid-3" style="gap: 12px; background: transparent">
+        <div class="trio-card">
+          <div class="num">01 环境</div>
+          <h3>舒适度提醒</h3>
+          <p>猫房/犬舍温湿度偏离舒适区，微信推送建议。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">02 日程</div>
+          <h3>喂食提醒</h3>
+          <p>定时喂食、换水提醒，可对接简单执行节点。</p>
+        </div>
+        <div class="trio-card">
+          <div class="num">03 预留</div>
+          <h3>画面联动</h3>
+          <p>摄像头事件结构化上报（规划项，非当前交付）。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-section alt">
+      <p class="eyebrow">为何保留占位</p>
+      <h2>客单价与数据价值低于温室与工业。</h2>
+      <div class="boundary-note">
+        宠物场景帮助对外讲清「平台底座可服务多垂直」，但飞轮数据密度与 B2B
+        付费意愿均弱于守棚工长。仅保留叙事占位，不做试点与收费承诺。
+      </div>
+      <p style="margin-top: 32px; text-align: center; font-size: 14px; color: var(--sf-mute)">
+        当前售卖与联调重点：<a
+          href="scene-greenhouse.html"
+          style="color: var(--sf-accent); font-weight: 500"
+          >守棚工长 LIVE →</a
+        >
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      <span>本页为 EXPLORE 占位</span>
+      <a href="scenes.html" style="color: var(--sf-body)">返回能力示范列表</a>
+    </footer>
+  </body>
+</html>

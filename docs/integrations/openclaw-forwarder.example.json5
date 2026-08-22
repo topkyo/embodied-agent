@@ -1,0 +1,22 @@
+// OpenClaw 薄通道示例：把微信入站转发到具身Agent API，勿让 Agent 抢答。
+// 复制到 ~/.openclaw/openclaw.json 的 hooks 段并按环境修改 URL/密钥。
+{
+  hooks: {
+    enabled: true,
+    token: "your-openclaw-hooks-token",
+    mappings: [
+      {
+        match: { path: "embodied-agent" },
+        action: "agent",
+        // 使用 transform 脚本将入站转为 HTTP POST（推荐见 scripts/openclaw-hook-forward-embodied-agent.mjs）
+        transform: { module: "embodied-agent-forward.js" },
+        deliver: true,
+        channel: "last",
+      },
+    ],
+  },
+  // 具身Agent API（本机或公网反代）
+  // POST https://<host>/integrations/chat
+  // Authorization: Bearer <INTEGRATION_SECRET>
+  // Body: { platform: "wechat", user_id: "<微信openid>", text?: "...", audio_base64?: "...", audio_format?: "wav" }
+}

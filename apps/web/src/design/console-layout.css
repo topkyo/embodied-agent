@@ -1,0 +1,447 @@
+/*
+ * console-layout.css — ops console 结构布局
+ * sidebar / frame / drawer / overview 网格与 greenhouse 卡片结构。
+ * 非职责：.pill / .btn 变体（console-settings.css）、ops 色板皮肤（console.css）
+ */
+
+/* Console IA layout */
+.console-shell .console-frame {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.console-sidebar {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  padding: 0.75rem;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-ops-surface);
+  overscroll-behavior: contain;
+}
+
+.console-sidebar-pack {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.console-sidebar-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  color: var(--sf-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.console-sidebar-nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.console-nav-group {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.console-nav-group-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+  margin: 0;
+  padding: 0.35rem 0.65rem 0.2rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--sf-mute);
+  text-align: left;
+}
+
+.console-nav-group-toggle:focus-visible {
+  outline: 2px solid var(--sf-accent);
+  outline-offset: 2px;
+  border-radius: var(--sf-radius);
+}
+
+.console-nav-group-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--sf-mute);
+}
+
+.console-nav-group-chevron {
+  flex-shrink: 0;
+  color: var(--sf-mute);
+  transition: transform 200ms ease;
+  transform: rotate(-90deg);
+}
+
+.console-nav-group-chevron.is-open {
+  transform: rotate(0deg);
+}
+
+.console-nav-group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms ease;
+}
+
+.console-nav-group-panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.console-nav-group-panel-inner {
+  overflow: hidden;
+  display: grid;
+  gap: 0.25rem;
+  min-height: 0;
+}
+
+.console-sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid transparent;
+  border-left: 2px solid transparent;
+  border-radius: var(--sf-radius);
+  color: var(--sf-mute);
+  font-size: 0.9rem;
+}
+
+.console-sidebar-nav a:hover {
+  border-color: var(--sf-line);
+  border-left-color: var(--sf-line);
+  color: var(--sf-ink);
+}
+
+.console-sidebar-nav a:focus-visible {
+  border-color: var(--sf-line);
+  color: var(--sf-ink);
+  outline: 2px solid var(--sf-accent);
+  outline-offset: 2px;
+}
+
+.console-sidebar-nav a.active,
+.console-sidebar-nav a[aria-current="page"] {
+  border-color: var(--sf-line);
+  border-left-color: var(--sf-accent);
+  background: var(--sf-white);
+  color: var(--sf-accent);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .console-nav-group-chevron,
+  .console-nav-group-panel {
+    transition: none;
+  }
+
+  .console-sidebar {
+    transition: none;
+  }
+}
+
+.console-main {
+  min-width: 0;
+}
+
+.console-drawer-toggle {
+  display: none;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-white);
+  padding: 0.4rem;
+  color: var(--sf-ink);
+}
+
+.console-drawer-backdrop {
+  display: none;
+}
+
+.console-top-nav {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.overview-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.greenhouse-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.greenhouse-card {
+  padding: 0.85rem;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-white);
+}
+
+.greenhouse-card.stale {
+  opacity: 0.85;
+}
+
+.greenhouse-card header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.greenhouse-card header strong {
+  flex: 1;
+}
+
+.greenhouse-readings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.greenhouse-readings div strong {
+  display: block;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.greenhouse-readings div span {
+  font-size: 0.75rem;
+  color: var(--sf-mute);
+}
+
+@keyframes greenhouse-metric-flash {
+  from {
+    background-color: var(--sf-info-bg, #e8f1fb);
+  }
+
+  to {
+    background-color: transparent;
+  }
+}
+
+.greenhouse-metric--flash {
+  border-radius: 4px;
+  animation: greenhouse-metric-flash 0.65s ease-out;
+}
+
+.flywheel-panels {
+  display: grid;
+  gap: 1rem;
+}
+
+/* 现场视图（SiteViewPanel）— industrial 首版柜体拓扑示意 */
+.site-view-panel .site-view-layout {
+  align-items: flex-start;
+}
+
+.site-view-svg {
+  width: min(100%, 320px);
+  height: auto;
+  flex-shrink: 0;
+  border: 1px solid var(--sf-line);
+  border-radius: var(--sf-radius);
+  background: var(--sf-white);
+}
+
+.site-view-cabinet {
+  fill: var(--sf-bg, #f7f7f5);
+  stroke: var(--sf-line);
+  stroke-width: 1.5;
+}
+
+.site-view-point {
+  fill: var(--sf-mute);
+  stroke: var(--sf-line);
+  stroke-width: 1;
+}
+
+.site-view-point--live {
+  fill: var(--sf-ok, #2f6f4e);
+  stroke: var(--sf-ok, #2f6f4e);
+}
+
+.site-view-fan {
+  fill: var(--sf-bg, #f7f7f5);
+  stroke: var(--sf-line);
+  stroke-width: 1.5;
+}
+
+.site-view-fan--on {
+  fill: var(--sf-info-bg, #e8f1fb);
+  stroke: var(--sf-info, #2b6cb0);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: site-view-fan-rotate 4s linear infinite;
+}
+
+@keyframes site-view-fan-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.site-view-alert {
+  fill: var(--sf-warn, #b45309);
+  animation: site-view-alert-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes site-view-alert-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.site-view-panel.site-view--focus-executing .site-view-fan--on {
+  stroke: var(--sf-warn, #b45309);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 4px rgb(180 83 9 / 35%));
+}
+
+.site-view-panel.site-view--focus-executing .site-view-point--live {
+  animation: site-view-execute-breathe 1.6s ease-in-out infinite;
+}
+
+@keyframes site-view-execute-breathe {
+  0%,
+  100% {
+    stroke-width: 1;
+  }
+
+  50% {
+    stroke-width: 3;
+  }
+}
+
+.site-view-alert-text {
+  fill: var(--sf-white, #fff);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.site-view-label {
+  fill: var(--sf-mute);
+  font-size: 11px;
+}
+
+.site-view-value {
+  fill: var(--sf-ink, #1a1a1a);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.site-view-side {
+  min-width: 160px;
+  flex: 1;
+}
+
+.site-view-trail-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+}
+
+.site-view-trail {
+  margin: 0;
+  padding-left: 1rem;
+  list-style: disc;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-view-fan--on,
+  .site-view-alert,
+  .site-view-panel.site-view--focus-executing .site-view-point--live {
+    animation: none;
+  }
+
+  .greenhouse-metric--flash {
+    animation: none;
+  }
+}
+
+/* .pill 变体真源：console-settings.css（Phase 3 删除此处重复） */
+
+@media (max-width: 860px) {
+  .console-shell .console-frame {
+    grid-template-columns: 1fr;
+  }
+
+  .console-drawer-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .console-sidebar-nav a {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .greenhouse-card header strong {
+    font-size: 16px;
+  }
+
+  .greenhouse-readings div strong {
+    font-size: 14px;
+  }
+
+  .greenhouse-readings div span {
+    font-size: 12px;
+  }
+
+  .console-sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    bottom: 0;
+    z-index: 40;
+    width: min(280px, 85vw);
+    transform: translateX(-110%);
+    transition: transform 0.2s ease;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+
+  .console-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .console-drawer-backdrop {
+    display: block;
+    position: fixed;
+    inset: 56px 0 0;
+    z-index: 30;
+    border: none;
+    background: rgba(36, 48, 33, 0.35);
+    cursor: pointer;
+  }
+}

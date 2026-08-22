@@ -1,0 +1,74 @@
+{
+  "name": "@embodied-agent/domain-agriculture",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./registry/canonical-sim": {
+      "types": "./dist/registry/canonical-sim.d.ts",
+      "import": "./dist/registry/canonical-sim.js"
+    },
+    "./registry/device-registry": {
+      "types": "./dist/registry/device-registry.d.ts",
+      "import": "./dist/registry/device-registry.js"
+    },
+    "./prompt/scene-skills": {
+      "types": "./dist/prompt/scene-skills.d.ts",
+      "import": "./dist/prompt/scene-skills.js"
+    },
+    "./structural/structural-intent": {
+      "types": "./dist/structural/structural-intent.d.ts",
+      "import": "./dist/structural/structural-intent.js"
+    },
+    "./scene/registry": {
+      "types": "./dist/scene/registry.d.ts",
+      "import": "./dist/scene/registry.js"
+    },
+    "./manifest": {
+      "types": "./dist/manifest.d.ts",
+      "import": "./dist/manifest.js"
+    },
+    "./skills.js": {
+      "types": "./dist/skills.d.ts",
+      "import": "./dist/skills.js"
+    },
+    "./schemas/intent-greenhouse.js": {
+      "types": "./dist/schemas/intent-greenhouse.d.ts",
+      "import": "./dist/schemas/intent-greenhouse.js"
+    },
+    "./scene/mode-store": {
+      "types": "./dist/scene/mode-store.d.ts",
+      "import": "./dist/scene/mode-store.js"
+    },
+    "./scene/pack": {
+      "types": "./dist/scene/pack.d.ts",
+      "import": "./dist/scene/pack.js"
+    },
+    "./flywheel-adapter": {
+      "types": "./dist/flywheel/adapter.d.ts",
+      "import": "./dist/flywheel/adapter.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "build:bootstrap": "rm -rf dist && tsc -p tsconfig.bootstrap.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@embodied-agent/core": "0.0.1",
+    "@embodied-agent/domain-sdk": "0.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.8"
+  }
+}

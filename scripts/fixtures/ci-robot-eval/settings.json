@@ -1,0 +1,35 @@
+{
+  "deployment_id": "dep-robot-ci-001",
+  "deployment_name": "Robot CI",
+  "active_domain": "robotics",
+  "llm_provider": "deepseek",
+  "llm_base_url": "https://api.deepseek.com/v1",
+  "llm_model": "deepseek-v4-flash",
+  "llm_thinking": true,
+  "stt_provider": "none",
+  "stt_model": "whisper-1",
+  "mqtt_url": "mqtt://127.0.0.1:1883",
+  "domain_configs": {
+    "robotics": {
+      "m20_base_url": "http://127.0.0.1:3099",
+      "default_robot_id": "m20-001",
+      "waypoints": [
+        {
+          "waypoint_id": "dock",
+          "name": "充电桩",
+          "points": [{ "x": 0, "y": 0, "yaw": 0 }]
+        },
+        {
+          "waypoint_id": "gate",
+          "name": "门口通道",
+          "points": [{ "x": 2, "y": 1, "yaw": 0 }]
+        },
+        {
+          "waypoint_id": "yard",
+          "name": "院区",
+          "points": [{ "x": 5, "y": 1, "yaw": 0 }]
+        }
+      ]
+    }
+  }
+}

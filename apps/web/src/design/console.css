@@ -1,0 +1,487 @@
+/*
+ * console.css — ops 视觉皮肤（.ops-console-root 作用域）
+ * 覆盖 shell 下的颜色/间距；布局结构见 console-layout.css。
+ * 不负责 .btn / .pill 真源（console-settings.css）。
+ */
+
+.ops-console-root {
+  min-height: 100vh;
+  background: var(--sf-ops-bg);
+  color: var(--sf-ops-text);
+  font-family: var(--sf-sans);
+}
+
+.ops-console-root .app-shell.console-shell {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.ops-console-root .top-bar {
+  display: none;
+}
+
+.ops-console-topbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--sf-ops-border);
+  font-size: 12px;
+  color: var(--sf-ops-muted);
+  background: var(--sf-ops-surface);
+}
+
+.ops-console-topbar a {
+  color: var(--sf-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ops-console-topbar-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ops-console-topbar-actions > :first-child {
+  flex-shrink: 1;
+}
+
+.ops-console-topbar > .scene-ops-readiness-badge,
+.ops-console-topbar > .scene-ops-readiness-badge-link {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  padding: 48px 20px 80px;
+}
+
+.login-card {
+  width: min(480px, 100%);
+}
+
+.login-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.login-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.login-panel input {
+  padding: 10px 12px;
+  border: 1px solid var(--sf-ops-border, #d8dee9);
+  border-radius: var(--sf-radius);
+}
+
+.login-error {
+  color: var(--sf-red);
+}
+
+.login-back {
+  margin-top: 20px;
+}
+
+.start-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px 20px 80px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.start-top-bar {
+  margin-bottom: 8px;
+}
+
+.start-top-bar .top-bar-end {
+  gap: 12px;
+}
+
+.start-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 720px;
+}
+
+.start-hero h1 {
+  margin: 4px 0 0;
+}
+
+.start-subtitle,
+.start-banner-active,
+.start-banner-error,
+.start-anon-hint {
+  font-size: 14px;
+}
+
+.start-banner-error {
+  color: var(--sf-red);
+}
+
+.start-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.start-picker-label {
+  margin: 0;
+  font-size: 12px;
+}
+
+.start-picker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.start-picker-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--sf-ops-border, #d8dee9);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--sf-ops-text);
+  background: var(--sf-ops-bg, #ffffff);
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background 120ms ease;
+}
+
+.start-picker-chip:hover {
+  border-color: var(--sf-accent, #1f8a5b);
+  color: var(--sf-accent, #1f8a5b);
+}
+
+.start-picker-chip.is-current {
+  border-color: var(--sf-accent, #1f8a5b);
+  background: var(--sf-accent-soft, rgba(31, 138, 91, 0.08));
+  color: var(--sf-accent, #1f8a5b);
+}
+
+.start-picker-name {
+  font-weight: 600;
+}
+
+.start-picker-tag {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--sf-accent-soft, rgba(31, 138, 91, 0.12));
+  color: var(--sf-accent, #1f8a5b);
+  letter-spacing: 0.02em;
+}
+
+.start-qr-area {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.start-qr-area > * {
+  width: min(360px, 100%);
+}
+
+/* 重新扫码 / 重新绑定 时，WechatBind 的 `margin: 2rem 0` 会偏向 左 / 右；
+   * .start-qr-area 是 flex 居中容器 + 自带 maring:auto 兜底，让 QR 始终 水平居中 */
+.start-qr-area > .wechat-bind,
+.start-qr-area > .integration-catalog > .wechat-bind {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.start-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.ops-role-banner {
+  background: var(--sf-accent-soft);
+  border: 1px solid rgba(31, 138, 91, 0.25);
+  border-radius: var(--sf-radius);
+  padding: 12px 16px;
+  margin: 0 0 20px;
+  font-size: 13px;
+  color: var(--sf-ops-muted);
+}
+
+.ops-role-banner strong {
+  color: var(--sf-accent);
+}
+
+.ops-console-topbar-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sf-ops-text);
+}
+
+.ops-role-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--sf-ops-border);
+  background: var(--sf-ops-bg);
+  color: var(--sf-ops-muted);
+}
+
+.ops-role-chip[data-role="admin"] {
+  border-color: rgba(31, 138, 91, 0.35);
+  background: var(--sf-accent-soft);
+  color: var(--sf-accent);
+}
+
+.ops-console-root .console-frame {
+  display: flex;
+  min-height: 100vh;
+}
+
+.ops-console-root .console-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--sf-ops-surface);
+  border-right: 1px solid var(--sf-ops-border);
+  border-bottom: none;
+  margin: 0;
+  padding: 20px 0;
+  border-radius: 0;
+}
+
+.ops-console-root .console-sidebar-eyebrow {
+  padding: 0 20px 16px;
+  margin: 0 0 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--sf-ops-text);
+  border-bottom: 1px solid var(--sf-ops-border);
+}
+
+.ops-console-root .console-sidebar-eyebrow svg {
+  color: var(--sf-accent);
+}
+
+.ops-console-root .console-sidebar-nav {
+  gap: 0.35rem;
+  padding: 0;
+}
+
+.ops-console-root .console-nav-group-toggle {
+  padding: 10px 20px 4px;
+}
+
+.ops-console-root .console-nav-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--sf-ops-muted);
+}
+
+.ops-console-root .console-nav-group-chevron {
+  color: var(--sf-ops-muted);
+}
+
+.ops-console-root .console-nav-group-panel-inner {
+  gap: 0;
+}
+
+.ops-console-root .console-sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--sf-ops-muted);
+  border-radius: 0;
+  border: none;
+  border-left: 2px solid transparent;
+  margin: 0;
+}
+
+.ops-console-root .console-sidebar-nav a:hover {
+  border-color: transparent;
+  border-left-color: transparent;
+  color: var(--sf-ops-text);
+  background: rgba(31, 138, 91, 0.06);
+}
+
+.ops-console-root .console-sidebar-nav a.active,
+.ops-console-root .console-sidebar-nav a[aria-current="page"] {
+  color: var(--sf-ops-text);
+  background: var(--sf-accent-soft);
+  border: none;
+  border-left: 2px solid var(--sf-accent);
+  font-weight: 600;
+}
+
+.ops-console-root .console-sidebar-foot {
+  padding: 20px;
+  margin-top: auto;
+  font-size: 12px;
+  border-top: 1px solid var(--sf-ops-border);
+}
+
+.ops-console-root .console-sidebar-foot a {
+  color: var(--sf-accent);
+}
+
+/* Desktop: secondary actions stay in topbar; drawer foot is mobile-only. */
+.ops-console-sidebar-secondary {
+  display: none;
+}
+
+.ops-exit-installer {
+  margin-left: 12px;
+  font-size: 12px;
+  padding: 4px 10px;
+}
+
+.ops-console-root .console-main {
+  flex: 1;
+  min-width: 0;
+  background: var(--sf-ops-bg);
+  padding: 0;
+}
+
+.ops-console-root .settings-console {
+  padding: 28px;
+}
+
+.ops-console-root .console-hero h1 {
+  font-size: 28px;
+  color: var(--sf-ops-text);
+}
+
+.ops-console-root .settings-console .eyebrow {
+  color: var(--sf-ops-muted);
+}
+
+.ops-console-root .settings-console .muted {
+  color: var(--sf-ops-muted);
+}
+
+.ops-console-root .console-status-card {
+  background: var(--sf-ops-surface);
+  border: 1px solid var(--sf-ops-border);
+  border-radius: var(--sf-radius);
+}
+
+.ops-console-root .console-status-card.ok strong,
+.ops-console-root .console-status-card.ok svg {
+  color: var(--sf-accent);
+}
+
+@media (max-width: 860px) {
+  .ops-console-root .top-bar {
+    display: flex;
+    padding: 12px 16px;
+    margin: 0;
+    border-bottom: 1px solid var(--sf-ops-border);
+    background: var(--sf-ops-surface);
+  }
+
+  .ops-console-root .console-drawer-toggle {
+    color: var(--sf-ops-text);
+  }
+
+  .ops-console-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .ops-console-topbar-title {
+    margin-right: 0;
+    font-size: 14px;
+  }
+
+  /* Secondary actions move into the drawer foot to free the topbar. */
+  .ops-console-topbar-actions {
+    display: none;
+  }
+
+  .ops-console-root .console-sidebar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ops-console-sidebar-secondary {
+    display: grid;
+    gap: 10px;
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .ops-console-sidebar-secondary .btn,
+  .ops-console-sidebar-secondary a {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .ops-console-topbar-actions .btn,
+  .ops-console-topbar-actions a {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .ops-console-root .console-sidebar-nav a {
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .ops-console-root .console-status-card {
+    font-size: 14px;
+  }
+
+  .ops-console-root .console-status-card strong {
+    font-size: 16px;
+  }
+
+  .ops-console-root .console-status-card span {
+    font-size: 14px;
+  }
+
+  .login-panel label {
+    font-size: 14px;
+  }
+
+  .login-panel input,
+  .login-panel .btn,
+  .login-card .btn {
+    min-height: 44px;
+    font-size: 14px;
+  }
+}

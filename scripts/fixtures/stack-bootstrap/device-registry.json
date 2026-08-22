@@ -1,0 +1,172 @@
+{
+  "deployments": [
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "name": "守棚工长试点",
+      "timezone": "Asia/Shanghai",
+      "status": "active"
+    }
+  ],
+  "entities": [
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "domain_id": "agriculture",
+      "entity_type": "greenhouse",
+      "entity_id": "gh-001",
+      "name": "1 号棚",
+      "aliases": ["1号棚", "一号棚", "1棚"],
+      "status": "active"
+    },
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "domain_id": "agriculture",
+      "entity_type": "greenhouse",
+      "entity_id": "gh-002",
+      "name": "2 号棚",
+      "aliases": ["2号棚", "二号棚", "2棚"],
+      "status": "active"
+    }
+  ],
+  "nodes": [
+    {
+      "node_id": "node-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-001",
+      "firmware_version": "sim-0.3.0",
+      "config_version": 1,
+      "status": "active"
+    },
+    {
+      "node_id": "node-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-002",
+      "firmware_version": "sim-0.3.0",
+      "config_version": 1,
+      "status": "active"
+    }
+  ],
+  "devices": [
+    {
+      "device_id": "sensor-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-001",
+      "device_type": "sensor",
+      "name": "1号棚模拟温湿度",
+      "aliases": ["模拟温湿度", "1号棚模拟传感器"],
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "channel": "i2c:0x44",
+      "metrics": ["temperature_c", "humidity_percent"]
+    },
+    {
+      "device_id": "vent-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-001",
+      "device_type": "vent_motor",
+      "name": "1号棚模拟左侧帘",
+      "aliases": ["模拟左侧帘", "1号棚模拟侧帘", "1号棚侧帘", "一号棚侧帘"],
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "channel": "relay:vent_left",
+      "default_for": "vent_motor"
+    },
+    {
+      "device_id": "fan-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-001",
+      "device_type": "fan",
+      "name": "1号棚模拟风机",
+      "aliases": ["模拟风机", "1号棚风机", "一号棚风机"],
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "channel": "relay:fan_01",
+      "default_for": "fan"
+    },
+    {
+      "device_id": "gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-001",
+      "device_type": "greenhouse_controller",
+      "name": "1 号棚环控器",
+      "aliases": ["1号棚环控器"],
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "default_for": "greenhouse_controller"
+    },
+    {
+      "device_id": "irrigation-sim-gh-001",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-001",
+      "device_type": "irrigation_valve",
+      "name": "1号棚A区灌溉阀",
+      "aliases": ["A区灌溉", "1号棚A区浇水"],
+      "node_id": "node-sim-gh-001",
+      "status": "active",
+      "channel": "relay:irrigation_a",
+      "zone_id": "zone-a",
+      "default_for": "irrigation",
+      "max_duration_seconds": 3600
+    },
+    {
+      "device_id": "sensor-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-002",
+      "device_type": "sensor",
+      "name": "2号棚温湿度",
+      "aliases": ["2号棚模拟温湿度", "2号棚模拟传感器"],
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "channel": "i2c:0x44",
+      "metrics": ["temperature_c", "humidity_percent"]
+    },
+    {
+      "device_id": "vent-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-002",
+      "device_type": "vent_motor",
+      "name": "2号棚左侧帘",
+      "aliases": ["2号棚侧帘", "二号棚侧帘", "2号棚模拟侧帘"],
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "channel": "relay:vent_left",
+      "default_for": "vent_motor"
+    },
+    {
+      "device_id": "fan-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-002",
+      "device_type": "fan",
+      "name": "2号棚风机",
+      "aliases": ["2号棚模拟风机", "二号棚风机"],
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "channel": "relay:fan_01",
+      "default_for": "fan"
+    },
+    {
+      "device_id": "ghc-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-002",
+      "device_type": "greenhouse_controller",
+      "name": "2 号棚环控器",
+      "aliases": ["2号棚环控器"],
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "default_for": "greenhouse_controller"
+    },
+    {
+      "device_id": "irrigation-sim-gh-002",
+      "deployment_id": "dep-gh-pilot-001",
+      "entity_id": "gh-002",
+      "device_type": "irrigation_valve",
+      "name": "2号棚B区灌溉阀",
+      "aliases": ["B区灌溉", "2号棚B区浇水"],
+      "node_id": "node-sim-gh-002",
+      "status": "active",
+      "channel": "relay:irrigation_b",
+      "zone_id": "zone-b",
+      "default_for": "irrigation",
+      "max_duration_seconds": 3600
+    }
+  ]
+}

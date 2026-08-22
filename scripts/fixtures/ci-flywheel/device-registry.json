@@ -1,0 +1,32 @@
+{
+  "deployments": [
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "name": "守棚工长试点",
+      "timezone": "Asia/Shanghai",
+      "status": "active"
+    }
+  ],
+  "entities": [
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "domain_id": "agriculture",
+      "entity_type": "greenhouse",
+      "entity_id": "gh-001",
+      "name": "1 号棚",
+      "aliases": ["1号棚", "一号棚", "1棚"],
+      "status": "active"
+    },
+    {
+      "deployment_id": "dep-gh-pilot-001",
+      "domain_id": "agriculture",
+      "entity_type": "greenhouse",
+      "entity_id": "gh-002",
+      "name": "2 号棚",
+      "aliases": ["2号棚", "二号棚", "2棚"],
+      "status": "active"
+    }
+  ],
+  "nodes": [],
+  "devices": []
+}

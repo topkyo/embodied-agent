@@ -1,0 +1,24 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/core" },
+    { "path": "packages/platform" },
+    { "path": "packages/memory" },
+    { "path": "packages/node" },
+    { "path": "packages/agent" },
+    { "path": "packages/runtime" },
+    { "path": "packages/chat-runtime" },
+    { "path": "packages/channel-runtime" },
+    { "path": "packages/alert-runtime" },
+    { "path": "packages/domain-sdk" },
+    { "path": "scenes/aquaculture" },
+    { "path": "scenes/greenhouse" },
+    { "path": "scenes/industrial" },
+    { "path": "scenes/robot" },
+    { "path": "packages/safety" },
+    { "path": "apps/api" },
+    { "path": "apps/web" },
+    { "path": "apps/site" },
+    { "path": "tests/e2e" }
+  ]
+}

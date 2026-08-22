@@ -1,0 +1,10 @@
+{
+  "deployment_id": "dep-gh-pilot-001",
+  "deployment_name": "守棚工长试点",
+  "active_domain": "agriculture",
+  "domain_configs": {
+    "agriculture": {
+      "flywheel_greenhouse_ids": ["gh-001", "gh-002"]
+    }
+  }
+}

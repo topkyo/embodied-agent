@@ -1,0 +1,22 @@
+{"utterance":"看一下机器狗状态","expected_skill":"robot.query_status","expected":{"target":{}}}
+{"utterance":"M20 现在在哪","expected_skill":"robot.query_pose","expected":{"target":{}}}
+{"utterance":"机器狗导航状态怎么样","expected_skill":"robot.query_navigation_status","expected":{"target":{}}}
+{"utterance":"拍一张现场图","expected_skill":"robot.capture_image","expected":{}}
+{"utterance":"给我视频流地址","expected_skill":"robot.get_stream_url","expected":{}}
+{"utterance":"机器狗站起来","expected_skill":"robot.stand_up","expected":{"target":{}}}
+{"utterance":"让 M20 趴下","expected_skill":"robot.sit_down","expected":{"target":{}}}
+{"utterance":"向前走 1 秒","expected_skill":"robot.move","expected":{"parameters":{"duration_ms":1000}}}
+{"utterance":"去充电桩","expected_skill":"robot.navigate_to_waypoint","expected":{"parameters":{"waypoint_id":"dock"}}}
+{"utterance":"停止导航","expected_skill":"robot.cancel_navigation","expected":{"target":{}}}
+{"utterance":"喊话请注意现场安全","expected_skill":"robot.speak","expected":{"parameters":{"text":"请注意现场安全"}}}
+{"utterance":"音量调到 60","expected_skill":"robot.set_volume","expected":{"parameters":{"volume":60}}}
+{"utterance":"打开工作灯","expected_skill":"robot.set_light","expected":{"parameters":{"light":"work"}}}
+{"utterance":"播放警报","expected_skill":"robot.play_alarm","expected":{"target":{}}}
+{"utterance":"停止警报","expected_skill":"robot.stop_alarm","expected":{"target":{}}}
+{"utterance":"吊舱回中","expected_skill":"robot.gimbal_center","expected":{"target":{}}}
+{"utterance":"吊舱向左转 1 秒","expected_skill":"robot.gimbal_move","expected":{"parameters":{"direction":"left","duration_ms":1000}}}
+{"utterance":"吊舱变焦放大","expected_skill":"robot.gimbal_zoom","expected":{"parameters":{"action":"in"}}}
+{"utterance":"吊舱自动对焦","expected_skill":"robot.gimbal_auto_focus","expected":{"target":{}}}
+{"utterance":"激光测距","expected_skill":"robot.gimbal_laser_range","expected":{"target":{}}}
+{"utterance":"去充电桩巡检取证","expected_skill":"robot.start_inspection","expected":{"parameters":{"waypoint_id":"dock","source":"body"}}}
+{"utterance":"查询机器人巡检摘要","expected_skill":"robot.query_inspection_summary","expected":{"target":{}}}
